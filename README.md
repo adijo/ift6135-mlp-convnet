@@ -5,6 +5,6 @@ Solutions to the practical problems of assignment 1 in IFT 6135 winter 2019.
 ## Structure
 
 The repository is divided into three parts, one for each problem:
-- problem1/
-- problem2/
-- problem3/
+- mlp/
+- convnet/
+- kaggle/
