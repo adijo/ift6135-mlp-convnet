@@ -1,6 +1,6 @@
 # Problem 3 data sets
-problem3/data/trainset/
-problem3/data/testset/
+kaggle/data/trainset/
+kaggle/data/testset/
 
 # Pycharm
 .idea/
