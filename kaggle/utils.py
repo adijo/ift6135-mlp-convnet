@@ -9,6 +9,7 @@ from torch.utils.data.sampler import SubsetRandomSampler
 import torchvision
 import torchvision.transforms as transforms
 import random
+from sklearn.metrics import classification_report
 
 from kaggle.datasets import PictureDataset
 
@@ -51,6 +52,15 @@ def get_mnist_data_loaders(
                                               shuffle=False)
 
     return train_loader, validation_loader, test_loader
+
+
+def print_score(which, predicted, labels, logfile):
+    target_names = ["plane", "auto", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
+
+    print(which + "Score:")
+    print(which + "Score:", file=logfile)
+    print(classification_report(predicted, labels, target_names=target_names))
+    print(classification_report(predicted, labels, target_names=target_names), file=logfile)
 
 
 def get_data_loaders():
