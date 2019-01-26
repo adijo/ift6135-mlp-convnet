@@ -1,0 +1,2 @@
+cifar_cnn.py is currently the entry point for the Kaggle solution
+main_helgi_old.py is currently not used
