@@ -9,6 +9,7 @@ import random
 import numpy as np
 from torch.utils.data.sampler import SubsetRandomSampler
 from sklearn.metrics import classification_report
+import kaggle.neuralnets as neuralnets
 
 # Device configuration
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
@@ -61,7 +62,7 @@ test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
 
 
 
-model = CifarNet(num_classes).to(device)
+model = neuralnets.CifarNet(num_classes).to(device)
 
 def print_score(which, predicted, labels):
     print(which + "Score:")
