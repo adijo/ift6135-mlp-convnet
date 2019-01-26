@@ -59,62 +59,9 @@ test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
                                           shuffle=False)
 
 
-# https://arxiv.org/pdf/1412.6806.pdf
-#
-# (Attempt at 2 Pytorch implementation of the paper : STRIVING FOR SIMPLICITY - THE ALL CONVOLUTIONAL NET
-# JostTobiasSpringenbergâˆ—,AlexeyDosovitskiyâˆ—,ThomasBrox,MartinRiedmiller
-# Department of Computer Science - University of Freiburg - Freiburg, 79110, Germany
 
-# Roughly corresponds to the "All-CNN-C" network.
 
-# However, we are using the Adam optimizer and no dropout for the baseline.
-
-# Also, they were training the model for 350 epochs. Maximum that was tested here so far is 40.
-
-# Also, removed Batch normalisation, since we're not allowed.
-
-# Based on the code from the PyTorch Tutorial.
-
-class ConvNet(nn.Module):
-    def __init__(self, num_classes=10):
-        super(ConvNet, self).__init__()
-        self.layer1 = nn.Sequential(
-            nn.Dropout(input_dropout_rate),
-            nn.Conv2d(3, 96, kernel_size=3, stride=1, padding=0), #Adapted to CIFAR here. 3 channels instead of one
-            nn.ReLU())
-            #nn.MaxPool2d(kernel_size=2, stride=2))
-        self.layer2 = nn.Sequential(
-            nn.Conv2d(96, 96, kernel_size=3, stride=1, padding=0),
-            nn.ReLU())
-        self.layer3 = nn.Sequential(
-            #nn.Dropout(),
-            nn.Conv2d(96, 192, kernel_size=3, stride=2, padding=0),
-            nn.ReLU())
-        self.layer4 = nn.Sequential(
-            nn.Conv2d(192, 192, kernel_size=3, stride=1, padding=0),
-            nn.ReLU())
-        self.layer5 = nn.Sequential(
-            nn.Conv2d(192, 192, kernel_size=3, stride=1, padding=0),
-            nn.ReLU())
-        self.layer6 = nn.Sequential(
-            #nn.Dropout(),
-            nn.Conv2d(192, 192, kernel_size=3, stride=2, padding=0),
-            nn.ReLU())
-           # nn.MaxPool2d(kernel_size=2, stride=2))
-        self.fc = nn.Linear(4*4*192, num_classes) #Adapted to CIFAR here. 8x8 instead of 7x7 (32x32 images instead of 28x28)
-        
-    def forward(self, x):
-        out = self.layer1(x)
-        out = self.layer2(out)
-        out = self.layer3(out)
-        out = self.layer4(out)
-        out = self.layer5(out)
-        out = self.layer6(out)
-        out = out.reshape(out.size(0), -1)
-        out = self.fc(out)
-        return out
-
-model = ConvNet(num_classes).to(device)
+model = CifarNet(num_classes).to(device)
 
 def print_score(which, predicted, labels):
     print(which + "Score:")
@@ -130,6 +77,7 @@ logfile_prefix = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d
 logfile = open("results/" + logfile_prefix + ".txt","w+")
 # Loss and optimizer
 criterion = nn.CrossEntropyLoss()
+# TODO: Don't use Adam(assignment specifications don't allow using it)
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
 
 print(model, file=logfile)
