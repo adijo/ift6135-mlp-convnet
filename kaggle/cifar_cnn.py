@@ -40,11 +40,9 @@ def main():
                                               train=False,
                                               transform=transforms.ToTensor())
 
-
     n_train = 10000
     indices = list(range(len(train_dataset)))
     random.shuffle(indices)
-
 
     # Data loader
     train_loader = torch.utils.data.DataLoader(dataset=train_dataset,
@@ -61,9 +59,6 @@ def main():
                                               batch_size=batch_size,
                                               shuffle=False)
 
-
-
-
     model = neuralnets.CifarNet(num_classes).to(device)
 
     def print_score(which, predicted, labels):
@@ -72,7 +67,7 @@ def main():
         print(classification_report(predicted, labels, target_names=target_names))
         print(classification_report(predicted, labels, target_names=target_names), file=logfile)
 
-    #Logging functions. Will be used later for ploting graphs
+    # Logging functions. Will be used later for ploting graphs
     import time
     import datetime
     logfile_prefix = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H_%M_%S')
@@ -95,7 +90,7 @@ def main():
     total_step = len(train_loader)
 
     for epoch in range(num_epochs):
-        #Reset metrics for each epoch
+        # Reset metrics for each epoch
         scheduler.step()
         full_train_predicted = []
         full_train_labels = []
@@ -132,7 +127,7 @@ def main():
                 print ('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, Accuracy:{:.2f}'
                        .format(epoch+1, num_epochs, i+1, total_step, loss.item(), correct/total))
         print_score("Training", full_train_predicted, full_train_labels)
-        #At the end of the epoch, perform validation.
+        # At the end of the epoch, perform validation.
         if (epoch%10==0):
             torch.save(model, "model.bak")
             #model.save("model.bak") #Model backup at each 10 epoch, just in case.
@@ -156,9 +151,8 @@ def main():
     # Test the model
     model.eval()  # eval mode (batchnorm uses moving mean/variance instead of mini-batch mean/variance)
 
-    w, h = 10,10
+    w, h = 10, 10
     confusion_matrix = [[0 for x in range(w)] for y in range(h)]
-
 
     full_test_predicted = []
     full_test_labels = []
@@ -176,7 +170,8 @@ def main():
             labels = labels.cpu().numpy().tolist()
             full_test_predicted+=predicted
             full_test_labels+=labels
-            #Builds the confusion matrix
+
+            # Builds the confusion matrix
             for prediction, target in zip(predicted,labels):
                 confusion_matrix[prediction][target]+=1
         print_score("Test", full_test_predicted, full_test_labels)
@@ -188,13 +183,12 @@ def main():
 
     np.savetxt("results\\"+logfile_prefix+"_confusion_matrix.txt",np.matrix(confusion_matrix))
 
-    #Just for the log
+    # Just for the log
     print("Predicted (row) labels vs targets (column)", file=logfile)
     for i in range(0,10):
         for j in range(0,10):
             print(confusion_matrix[i][j],"\t",end='', file=logfile)
         print("\n",end="", file=logfile)
-
 
     logfile.close()
 
