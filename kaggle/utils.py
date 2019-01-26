@@ -3,10 +3,54 @@ import os
 import numpy as np
 import pickle
 import matplotlib.pyplot as plt
+import torch
 from torch.utils.data import DataLoader
 from torch.utils.data.sampler import SubsetRandomSampler
+import torchvision
+import torchvision.transforms as transforms
+import random
 
 from kaggle.datasets import PictureDataset
+
+
+def get_mnist_data_loaders(
+    batch_size
+):
+    # MNIST dataset
+    train_dataset = torchvision.datasets.CIFAR10(root='../../data/',
+                                                 train=True,
+                                                 transform=transforms.Compose([
+                                                     transforms.RandomHorizontalFlip(),
+                                                     transforms.RandomResizedCrop(32, scale=(0.85, 1.0)),
+                                                     transforms.RandomRotation(10),
+                                                     transforms.ToTensor(),
+                                                 ]),
+                                                 download=True)
+
+    test_dataset = torchvision.datasets.CIFAR10(root='../../data/',
+                                                train=False,
+                                                transform=transforms.ToTensor())
+
+    n_train = 10000
+    indices = list(range(len(train_dataset)))
+    random.shuffle(indices)
+
+    # Data loader
+    train_loader = torch.utils.data.DataLoader(dataset=train_dataset,
+                                               batch_size=batch_size,
+                                               shuffle=False,
+                                               sampler=SubsetRandomSampler(indices[:n_train]))
+
+    validation_loader = torch.utils.data.DataLoader(dataset=train_dataset,
+                                                    batch_size=batch_size,
+                                                    shuffle=False,
+                                                    sampler=SubsetRandomSampler(indices[n_train:]))
+
+    test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
+                                              batch_size=batch_size,
+                                              shuffle=False)
+
+    return train_loader, validation_loader, test_loader
 
 
 def get_data_loaders():

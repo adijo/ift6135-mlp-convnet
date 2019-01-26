@@ -1,15 +1,15 @@
-#https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/02-intermediate/convolutional_neural_network/main.py#L35-L56
-#Started from a tutorial on the web.
+"""
+Based on the following tutorial from the web:
+https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/02-intermediate/convolutional_neural_network/main.py#L35-L56
+"""
+
 import torch 
 import torch.nn as nn
-import torchvision
-import torchvision.transforms as transforms
 from torch.optim.lr_scheduler import MultiStepLR
-import random
 import numpy as np
-from torch.utils.data.sampler import SubsetRandomSampler
 from sklearn.metrics import classification_report
 import kaggle.neuralnets as neuralnets
+import kaggle.utils as utils
 
 
 def main():
@@ -22,42 +22,10 @@ def main():
     num_classes = 10
     batch_size = 100
     learning_rate = 0.001
-    input_dropout_rate = 0
-    weight_decay = 0.001 #As in the paper
+    # As in the paper
+    weight_decay = 0.001
 
-    # MNIST dataset
-    train_dataset = torchvision.datasets.CIFAR10(root='../../data/',
-                                                train=True,
-                                                transform=transforms.Compose([
-                                                    transforms.RandomHorizontalFlip(),
-                                                    transforms.RandomResizedCrop(32, scale=(0.85,1.0)),
-                                                    transforms.RandomRotation(10),
-                                                    transforms.ToTensor(),
-                                                    ]),
-                                                download=True)
-
-    test_dataset = torchvision.datasets.CIFAR10(root='../../data/',
-                                              train=False,
-                                              transform=transforms.ToTensor())
-
-    n_train = 10000
-    indices = list(range(len(train_dataset)))
-    random.shuffle(indices)
-
-    # Data loader
-    train_loader = torch.utils.data.DataLoader(dataset=train_dataset,
-                                               batch_size=batch_size,
-                                               shuffle=False,
-                                               sampler=SubsetRandomSampler(indices[:n_train]))
-
-    validation_loader = torch.utils.data.DataLoader(dataset=train_dataset,
-                                               batch_size=batch_size,
-                                               shuffle=False,
-                                               sampler=SubsetRandomSampler(indices[n_train:]))
-
-    test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
-                                              batch_size=batch_size,
-                                              shuffle=False)
+    train_loader, validation_loader, test_loader = utils.get_mnist_data_loaders(batch_size)
 
     model = neuralnets.CifarNet(num_classes).to(device)
 
