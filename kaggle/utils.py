@@ -6,61 +6,9 @@ import matplotlib.pyplot as plt
 import torch
 from torch.utils.data import DataLoader
 from torch.utils.data.sampler import SubsetRandomSampler
-import torchvision
-import torchvision.transforms as transforms
-import random
 from sklearn.metrics import classification_report
 
 from kaggle.datasets import PictureDataset
-
-
-def get_cifar_data_loaders(
-    batch_size
-):
-    # MNIST dataset
-    train_dataset = torchvision.datasets.CIFAR10(root='../../data/',
-                                                 train=True,
-                                                 transform=transforms.Compose([
-                                                     transforms.RandomHorizontalFlip(),
-                                                     transforms.RandomResizedCrop(32, scale=(0.85, 1.0)),
-                                                     transforms.RandomRotation(10),
-                                                     transforms.ToTensor(),
-                                                 ]),
-                                                 download=True)
-
-    test_dataset = torchvision.datasets.CIFAR10(root='../../data/',
-                                                train=False,
-                                                transform=transforms.ToTensor())
-
-    n_train = 10000
-    indices = list(range(len(train_dataset)))
-    random.shuffle(indices)
-
-    # Data loader
-    train_loader = torch.utils.data.DataLoader(dataset=train_dataset,
-                                               batch_size=batch_size,
-                                               shuffle=False,
-                                               sampler=SubsetRandomSampler(indices[:n_train]))
-
-    validation_loader = torch.utils.data.DataLoader(dataset=train_dataset,
-                                                    batch_size=batch_size,
-                                                    shuffle=False,
-                                                    sampler=SubsetRandomSampler(indices[n_train:]))
-
-    test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
-                                              batch_size=batch_size,
-                                              shuffle=False)
-
-    return train_loader, validation_loader, test_loader
-
-
-def print_score(which, predicted, labels, logfile):
-    target_names = ["Dog", "Cat"]
-
-    print(which + "Score:")
-    print(which + "Score:", file=logfile)
-    print(classification_report(predicted, labels, target_names=target_names))
-    print(classification_report(predicted, labels, target_names=target_names), file=logfile)
 
 
 def get_kaggle_data_loaders():
@@ -93,6 +41,15 @@ def get_kaggle_data_loaders():
     )
 
     return train_loader, validation_loader, test_loader
+
+
+def print_score(which, y_true, y_predicted, logfile):
+    target_names = ["Dog", "Cat"]
+
+    print(which + "Score:")
+    print(which + "Score:", file=logfile)
+    print(classification_report(y_true, y_predicted, target_names=target_names))
+    print(classification_report(y_true, y_predicted, target_names=target_names), file=logfile)
 
 
 def get_device():

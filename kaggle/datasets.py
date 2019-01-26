@@ -2,6 +2,7 @@ import os
 
 from torch.utils.data import Dataset
 from skimage import io
+from skimage import color
 import numpy
 
 CATEGORIES = {
@@ -21,14 +22,13 @@ class PictureDataset(Dataset):
         training_set = True if "trainset" in root_dir.lower() else False
 
         self.root_dir = root_dir
-        self.images_paths = numpy.array([])
+        self.image_names = numpy.array([])
         self.labels = numpy.array([])
         for path, sub_directories, files in os.walk(root_dir):
-            for name in files:
-                image_path = os.path.join(path, name)
-                self.images_paths = numpy.append(self.images_paths, image_path)
+            for image_name in files:
+                self.image_names = numpy.append(self.image_names, image_name)
                 if training_set:
-                    self.labels = numpy.append(self.labels, label_string_to_id(image_path.split(".")[1]))
+                    self.labels = numpy.append(self.labels, label_string_to_id(image_name.split(".")[1]))
                 else:
                     self.labels = numpy.append(self.labels, -1)
 
@@ -36,8 +36,14 @@ class PictureDataset(Dataset):
         return len(self.labels)
 
     def __getitem__(self, img_index):
-        image = io.imread(self.images_paths[img_index])
-        # swap color axis because
+        # Load image
+        image = io.imread(os.path.join(self.root_dir, self.image_names[img_index]))
+
+        # Convert from gray scale (1 channel) to RGB (3 channels) if needed
+        if len(image.shape) == 2:
+            image = color.gray2rgb(image)
+
+        # Swap the color axis because
         # numpy image: H x W x C
         # torch image: C X H X W
         image = image.transpose((2, 0, 1))

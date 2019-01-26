@@ -28,14 +28,17 @@ def main():
     # As in the paper
     weight_decay = 0.001
 
+    print("Indexing training and test examples...")
     train_loader, validation_loader, test_loader = utils.get_kaggle_data_loaders()
 
     model = neuralnets.KaggleNet(num_classes).to(device)
 
     # Logging functions. Will be used later for plotting graphs
     logfile_prefix = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H_%M_%S')
+    logfile_path = "results/" + logfile_prefix + ".txt"
 
-    logfile = open("results/" + logfile_prefix + ".txt", "w+")
+    print("Creating a file at %s to track results".format(logfile_path))
+    logfile = open(logfile_path, "w+")
     # Loss and optimizer
     criterion = nn.CrossEntropyLoss()
     # TODO: Don't use Adam(assignment specifications don't allow using it)
@@ -51,6 +54,7 @@ def main():
     # Train the model
     total_step = len(train_loader)
 
+    print("Training...")
     for epoch in range(num_epochs):
         # Reset metrics for each epoch
         scheduler.step()
@@ -86,7 +90,7 @@ def main():
                 logfile.flush()
                 print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, Accuracy:{:.2f}'
                        .format(epoch+1, num_epochs, i+1, total_step, loss.item(), correct/total))
-        utils.print_score("Training", full_train_predicted, full_train_labels, logfile)
+        utils.print_score("Training", full_train_labels, full_train_predicted, logfile)
         # At the end of the epoch, perform validation.
         if epoch % 10 == 0:
             torch.save(model, "model.bak")
