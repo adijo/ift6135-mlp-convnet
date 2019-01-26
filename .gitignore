@@ -1,6 +1,7 @@
-# Kaggle data sets
+# Kaggle
 kaggle/data/trainset/
 kaggle/data/testset/
+kaggle/*.bak
 
 # Pycharm
 .idea/

@@ -14,7 +14,7 @@ from sklearn.metrics import classification_report
 from kaggle.datasets import PictureDataset
 
 
-def get_mnist_data_loaders(
+def get_cifar_data_loaders(
     batch_size
 ):
     # MNIST dataset
@@ -63,15 +63,15 @@ def print_score(which, predicted, labels, logfile):
     print(classification_report(predicted, labels, target_names=target_names), file=logfile)
 
 
-def get_data_loaders():
+def get_kaggle_data_loaders():
     batch_size_train = 64
     batch_size_eval = 512
 
     device, use_cuda = get_device()
 
     parent_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    train_dataset = PictureDataset(os.path.join(parent_directory, "data", "trainset"))
-    test_dataset = PictureDataset(os.path.join(parent_directory, "data", "testset"))
+    train_dataset = PictureDataset(os.path.join(parent_directory, "kaggle", "data", "trainset"))
+    test_dataset = PictureDataset(os.path.join(parent_directory, "kaggle", "data", "testset"))
 
     # Shuffle the data and split it into a training and a validation set
     validation_split = 0.2

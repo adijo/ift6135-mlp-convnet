@@ -12,7 +12,7 @@ def main():
     results_file_name = "_".join(["TestNet", str(learning_rate), str(num_epochs)])
     test_data_set_results_save_path = os.path.join("predictions", results_file_name)
 
-    train_loader, validation_loader, test_loader = utils.get_data_loaders()
+    train_loader, validation_loader, test_loader = utils.get_kaggle_data_loaders()
 
     device, use_cuda = utils.get_device()
     model = TestNet().to(device)

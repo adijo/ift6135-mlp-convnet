@@ -1,0 +1,78 @@
+CifarNet(
+  (layer1): Sequential(
+    (0): Dropout(p=0)
+    (1): Conv2d(3, 96, kernel_size=(3, 3), stride=(1, 1))
+    (2): ReLU()
+  )
+  (layer2): Sequential(
+    (0): Conv2d(96, 96, kernel_size=(3, 3), stride=(1, 1))
+    (1): ReLU()
+  )
+  (layer3): Sequential(
+    (0): Conv2d(96, 192, kernel_size=(3, 3), stride=(2, 2))
+    (1): ReLU()
+  )
+  (layer4): Sequential(
+    (0): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1))
+    (1): ReLU()
+  )
+  (layer5): Sequential(
+    (0): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1))
+    (1): ReLU()
+  )
+  (layer6): Sequential(
+    (0): Conv2d(192, 192, kernel_size=(3, 3), stride=(2, 2))
+    (1): ReLU()
+  )
+  (fc): Linear(in_features=3072, out_features=10, bias=True)
+)
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    lr: 0.001
+    weight_decay: 0.001
+)
+Learning rate: 0.001
+Epoch [1/50], Step [50/100], Loss: 2.1192, Accuracy:0.18
+Epoch [1/50], Step [100/100], Loss: 1.9765, Accuracy:0.21
+TrainingScore:
+              precision    recall  f1-score   support
+
+       plane       0.48      0.22      0.30      2120
+        auto       0.18      0.26      0.21       693
+        bird       0.05      0.16      0.07       303
+         cat       0.05      0.17      0.07       275
+        deer       0.10      0.17      0.13       590
+         dog       0.12      0.19      0.14       587
+        frog       0.47      0.21      0.29      2207
+       horse       0.25      0.16      0.19      1679
+        ship       0.17      0.23      0.19       705
+       truck       0.20      0.24      0.22       841
+
+   micro avg       0.21      0.21      0.21     10000
+   macro avg       0.21      0.20      0.18     10000
+weighted avg       0.30      0.21      0.23     10000
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+       plane       0.54      0.24      0.33      9096
+        auto       0.26      0.32      0.28      3293
+        bird       0.11      0.15      0.13      2738
+         cat       0.12      0.21      0.15      2230
+        deer       0.01      0.14      0.01       145
+         dog       0.10      0.27      0.15      1527
+        frog       0.51      0.29      0.37      7029
+       horse       0.25      0.25      0.25      3871
+        ship       0.35      0.24      0.29      5886
+       truck       0.25      0.24      0.25      4185
+
+   micro avg       0.25      0.25      0.25     40000
+   macro avg       0.25      0.24      0.22     40000
+weighted avg       0.35      0.25      0.28     40000
+
+Epoch 1 validation accuracy= 0.2500
+Epoch [2/50], Step [50/100], Loss: 2.0391, Accuracy:0.27
+Epoch [2/50], Step [100/100], Loss: 1.8905, Accuracy:0.28

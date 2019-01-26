@@ -23,12 +23,12 @@ def main():
     # Hyper parameters
     num_epochs = 50
     num_classes = 10
-    batch_size = 100
+    batch_size = 64
     learning_rate = 0.001
     # As in the paper
     weight_decay = 0.001
 
-    train_loader, validation_loader, test_loader = utils.get_mnist_data_loaders(batch_size)
+    train_loader, validation_loader, test_loader = utils.get_kaggle_data_loaders()
 
     model = neuralnets.CifarNet(num_classes).to(device)
 
