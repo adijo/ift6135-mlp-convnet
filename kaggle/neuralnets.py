@@ -23,12 +23,14 @@ class CifarNet(nn.Module):
     Roughly corresponds to the "All-CNN-C" network.
     Batch normalisation and dropout are not part of this net since they aren't allowed for this assignment.
     Based on the code from the PyTorch Tutorial.
+    TODO: Remove Dropout as it is not allowed in this assignment
     """
     def __init__(self, num_classes=10):
         super(CifarNet, self).__init__()
         self.layer1 = nn.Sequential(
-            nn.Dropout(input_dropout_rate),
-            nn.Conv2d(3, 96, kernel_size=3, stride=1, padding=0),  # Adapted to CIFAR here. 3 channels instead of one
+            nn.Dropout(0),
+            # Adapted to CIFAR here. 3 channels instead of one
+            nn.Conv2d(3, 96, kernel_size=3, stride=1, padding=0),
             nn.ReLU())
         # nn.MaxPool2d(kernel_size=2, stride=2))
         self.layer2 = nn.Sequential(
@@ -49,8 +51,8 @@ class CifarNet(nn.Module):
             nn.Conv2d(192, 192, kernel_size=3, stride=2, padding=0),
             nn.ReLU())
         # nn.MaxPool2d(kernel_size=2, stride=2))
-        self.fc = nn.Linear(4 * 4 * 192,
-                            num_classes)  # Adapted to CIFAR here. 8x8 instead of 7x7 (32x32 images instead of 28x28)
+        # Adapted to CIFAR here. 8x8 instead of 7x7 (32x32 images instead of 28x28)
+        self.fc = nn.Linear(4 * 4 * 192, num_classes)
 
     def forward(self, x):
         out = self.layer1(x)

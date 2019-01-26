@@ -1,6 +1,6 @@
 import os
-import torch.utils.data.Dataset as Dataset
 import torch.tensor
+from torch.utils.data import Dataset
 from skimage import io
 
 

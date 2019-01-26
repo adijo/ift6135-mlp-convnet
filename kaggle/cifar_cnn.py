@@ -3,10 +3,14 @@ Based on the following tutorial from the web:
 https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/02-intermediate/convolutional_neural_network/main.py#L35-L56
 """
 
+import time
+import datetime
+
 import torch 
 import torch.nn as nn
 from torch.optim.lr_scheduler import MultiStepLR
 import numpy as np
+
 import kaggle.neuralnets as neuralnets
 import kaggle.utils as utils
 
@@ -29,8 +33,6 @@ def main():
     model = neuralnets.CifarNet(num_classes).to(device)
 
     # Logging functions. Will be used later for plotting graphs
-    import time
-    import datetime
     logfile_prefix = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H_%M_%S')
 
     logfile = open("results/" + logfile_prefix + ".txt", "w+")
@@ -44,7 +46,7 @@ def main():
     print("Learning rate:", learning_rate, file=logfile)
     logfile.flush()
 
-    scheduler = MultiStepLR(optimizer, milestones=[20,40], gamma=0.1)
+    scheduler = MultiStepLR(optimizer, milestones=[20, 40], gamma=0.1)
 
     # Train the model
     total_step = len(train_loader)
@@ -130,8 +132,8 @@ def main():
             full_test_labels += labels
 
             # Builds the confusion matrix
-            for prediction, target in zip(predicted,labels):
-                confusion_matrix[prediction][target]+=1
+            for prediction, target in zip(predicted, labels):
+                confusion_matrix[prediction][target] += 1
         utils.print_score("Test", full_test_predicted, full_test_labels, logfile)
         print('Test Accuracy of the model on the 10000 test images: {} %'.format(100 * correct / total), file=logfile)
         print('Test Accuracy of the model on the 10000 test images: {} %'.format(100 * correct / total))
@@ -139,7 +141,7 @@ def main():
     # Save the model checkpoint
     torch.save(model.state_dict(), 'model.ckpt')
 
-    np.savetxt("results\\"+logfile_prefix+"_confusion_matrix.txt",np.matrix(confusion_matrix))
+    np.savetxt("results\\"+logfile_prefix+"_confusion_matrix.txt", np.matrix(confusion_matrix))
 
     # Just for the log
     print("Predicted (row) labels vs targets (column)", file=logfile)
