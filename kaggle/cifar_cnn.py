@@ -30,7 +30,7 @@ def main():
 
     train_loader, validation_loader, test_loader = utils.get_kaggle_data_loaders()
 
-    model = neuralnets.CifarNet(num_classes).to(device)
+    model = neuralnets.KaggleNet(num_classes).to(device)
 
     # Logging functions. Will be used later for plotting graphs
     logfile_prefix = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H_%M_%S')
@@ -62,8 +62,8 @@ def main():
         correct = 0
         total = 0
         for i, (images, labels) in enumerate(train_loader):
-            images = images.to(device)
-            labels = labels.to(device)
+            images = images.to(device, dtype=torch.float)
+            labels = labels.to(device, dtype=torch.long)
 
             # Forward pass
             outputs = model(images)

@@ -55,7 +55,7 @@ def get_cifar_data_loaders(
 
 
 def print_score(which, predicted, labels, logfile):
-    target_names = ["plane", "auto", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
+    target_names = ["Dog", "Cat"]
 
     print(which + "Score:")
     print(which + "Score:", file=logfile)

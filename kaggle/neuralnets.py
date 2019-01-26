@@ -12,7 +12,7 @@ Assignment's limitations when it comes to the CNN structure:
 """
 
 
-class CifarNet(nn.Module):
+class KaggleNet(nn.Module):
     """
     https://arxiv.org/pdf/1412.6806.pdf
 
@@ -26,33 +26,32 @@ class CifarNet(nn.Module):
     TODO: Remove Dropout as it is not allowed in this assignment
     """
     def __init__(self, num_classes=10):
-        super(CifarNet, self).__init__()
+        super(KaggleNet, self).__init__()
         self.layer1 = nn.Sequential(
             nn.Dropout(0),
-            # Adapted to CIFAR here. 3 channels instead of one
-            nn.Conv2d(3, 96, kernel_size=3, stride=1, padding=0),
+            # 64x64 picture so 3x64 = 192
+            nn.Conv2d(3, 192, kernel_size=3, stride=1, padding=0),
             nn.ReLU())
         # nn.MaxPool2d(kernel_size=2, stride=2))
         self.layer2 = nn.Sequential(
-            nn.Conv2d(96, 96, kernel_size=3, stride=1, padding=0),
+            nn.Conv2d(192, 192, kernel_size=3, stride=1, padding=0),
             nn.ReLU())
         self.layer3 = nn.Sequential(
             # nn.Dropout(),
-            nn.Conv2d(96, 192, kernel_size=3, stride=2, padding=0),
+            nn.Conv2d(192, 384, kernel_size=3, stride=2, padding=0),
             nn.ReLU())
         self.layer4 = nn.Sequential(
-            nn.Conv2d(192, 192, kernel_size=3, stride=1, padding=0),
+            nn.Conv2d(384, 384, kernel_size=3, stride=1, padding=0),
             nn.ReLU())
         self.layer5 = nn.Sequential(
-            nn.Conv2d(192, 192, kernel_size=3, stride=1, padding=0),
+            nn.Conv2d(384, 384, kernel_size=3, stride=1, padding=0),
             nn.ReLU())
         self.layer6 = nn.Sequential(
             # nn.Dropout(),
-            nn.Conv2d(192, 192, kernel_size=3, stride=2, padding=0),
+            nn.Conv2d(384, 384, kernel_size=3, stride=2, padding=0),
             nn.ReLU())
         # nn.MaxPool2d(kernel_size=2, stride=2))
-        # Adapted to CIFAR here. 8x8 instead of 7x7 (32x32 images instead of 28x28)
-        self.fc = nn.Linear(4 * 4 * 192, num_classes)
+        self.fc = nn.Linear(12 * 12 * 384, num_classes)
 
     def forward(self, x):
         out = self.layer1(x)

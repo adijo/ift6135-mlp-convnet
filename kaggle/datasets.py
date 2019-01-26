@@ -1,7 +1,5 @@
 import os
 
-import torch
-import tensorflow
 from torch.utils.data import Dataset
 from skimage import io
 import numpy
@@ -33,7 +31,6 @@ class PictureDataset(Dataset):
                     self.labels = numpy.append(self.labels, label_string_to_id(image_path.split(".")[1]))
                 else:
                     self.labels = numpy.append(self.labels, -1)
-                return
 
     def __len__(self):
         return len(self.labels)
