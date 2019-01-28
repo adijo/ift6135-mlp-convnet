@@ -2,6 +2,7 @@
 kaggle/data/trainset/
 kaggle/data/testset/
 kaggle/*.bak
+kaggle/*.ckpt
 
 # Pycharm
 .idea/
