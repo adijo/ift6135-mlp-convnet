@@ -163,7 +163,7 @@ def predict_test_set_labels(model, test_loader, device):
     with open(predictions_file_path, "w+") as predictions_file:
         predictions_file.write("id,label\n")
         for i in range(len(predictions)):
-            predictions_file.write("{},{}\n".format(str(i), target_names[predictions[i]]))
+            predictions_file.write("{},{}\n".format(str(i+1), target_names[predictions[i]]))
 
 
 if __name__ == '__main__':
