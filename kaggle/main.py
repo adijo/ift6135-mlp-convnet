@@ -3,6 +3,7 @@ Based on the following tutorial from the web:
 https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/02-intermediate/convolutional_neural_network/main.py#L35-L56
 """
 
+import copy
 import os
 import time
 import datetime
@@ -21,7 +22,7 @@ def main():
 
     print("Using device:", device)
     # Hyper parameters
-    num_epochs = 1
+    num_epochs = 50
     num_classes = 2
     batch_size = 64
     learning_rate = 0.001
@@ -50,6 +51,8 @@ def main():
 
     print("Training...")
     total_step = len(train_loader)
+    best_validation_accuracy = 0.0
+    best_model = copy.deepcopy(model)
     for epoch in range(num_epochs):
         train(model, device, total_step, scheduler, train_loader, validation_loader, criterion, optimizer, batch_size, logfile, epoch, num_epochs)
         validation_accuracy = validate(model, validation_loader, device, logfile)
@@ -57,15 +60,18 @@ def main():
         print("Epoch {} validation accuracy= {:.4f}".format(epoch + 1, validation_accuracy))
         print("Epoch {} validation accuracy= {:.4f}".format(epoch + 1, validation_accuracy), file=logfile)
 
+        # We preserve the best performing model. Early stopping ideology
+        if validation_accuracy > best_validation_accuracy:
+            best_validation_accuracy = validation_accuracy
+            best_model = copy.deepcopy(model)
+
         if epoch % 10 == 0:
-            torch.save(model, "model.bak")
+            torch.save(best_model, "model.bak")
 
     print("Training complete.")
+    print("The model that scored the highest validation accuracy {}% was preserved and will be used for predictions.".format(best_validation_accuracy*100))
 
-    predict_test_set_labels(model, test_loader, device)
-
-    # Save the model checkpoint
-    torch.save(model.state_dict(), 'model.ckpt')
+    predict_test_set_labels(best_model, test_loader, device)
 
 
 def train(model, device, total_step, scheduler, train_loader, validation_loader, criterion, optimizer, batch_size, logfile, epoch, num_epochs):
@@ -74,8 +80,8 @@ def train(model, device, total_step, scheduler, train_loader, validation_loader,
     full_train_predicted = []
     full_train_labels = []
 
-    correct = 0
-    total = 0
+    correct = 0.0
+    total = 0.0
     for i, (images, labels) in enumerate(train_loader):
         images = images.to(device, dtype=torch.float)
         labels = labels.to(device, dtype=torch.long)
@@ -110,8 +116,8 @@ def validate(model, validation_loader, device, logfile):
     full_validation_labels = []
 
     with torch.no_grad():
-        validation_correct = 0
-        validation_total = 0
+        validation_correct = 0.0
+        validation_total = 0.0
         for images, labels in validation_loader:
             validation_images = images.to(device, dtype=torch.float)
             validation_labels = labels.to(device, dtype=torch.long)
