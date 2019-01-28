@@ -23,12 +23,10 @@ class KaggleNet(nn.Module):
     Roughly corresponds to the "All-CNN-C" network.
     Batch normalisation and dropout are not part of this net since they aren't allowed for this assignment.
     Based on the code from the PyTorch Tutorial.
-    TODO: Remove Dropout as it is not allowed in this assignment
     """
-    def __init__(self, num_classes=10):
+    def __init__(self, num_classes=2):
         super(KaggleNet, self).__init__()
         self.layer1 = nn.Sequential(
-            nn.Dropout(0),
             # 64x64 picture so 3x64 = 192
             nn.Conv2d(3, 192, kernel_size=3, stride=1, padding=0),
             nn.ReLU())
@@ -37,7 +35,6 @@ class KaggleNet(nn.Module):
             nn.Conv2d(192, 192, kernel_size=3, stride=1, padding=0),
             nn.ReLU())
         self.layer3 = nn.Sequential(
-            # nn.Dropout(),
             nn.Conv2d(192, 384, kernel_size=3, stride=2, padding=0),
             nn.ReLU())
         self.layer4 = nn.Sequential(
@@ -47,7 +44,6 @@ class KaggleNet(nn.Module):
             nn.Conv2d(384, 384, kernel_size=3, stride=1, padding=0),
             nn.ReLU())
         self.layer6 = nn.Sequential(
-            # nn.Dropout(),
             nn.Conv2d(384, 384, kernel_size=3, stride=2, padding=0),
             nn.ReLU())
         # nn.MaxPool2d(kernel_size=2, stride=2))

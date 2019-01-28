@@ -21,12 +21,10 @@ def main():
 
     print("Using device:", device)
     # Hyper parameters
-    num_epochs = 50
-    num_classes = 10
+    num_epochs = 2
+    num_classes = 2
     batch_size = 64
     learning_rate = 0.001
-    # As in the paper
-    weight_decay = 0.001
 
     print("Indexing training and test examples...")
     train_loader, validation_loader, test_loader = utils.get_kaggle_data_loaders()
@@ -37,12 +35,11 @@ def main():
     logfile_prefix = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H_%M_%S')
     logfile_path = "results/" + logfile_prefix + ".txt"
 
-    print("Creating a file at %s to track results".format(logfile_path))
+    print("Creating a file at {} to track results".format(logfile_path))
     logfile = open(logfile_path, "w+")
     # Loss and optimizer
     criterion = nn.CrossEntropyLoss()
-    # TODO: Don't use Adam(assignment specifications don't allow using it)
-    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
+    optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
 
     print(model, file=logfile)
     print(optimizer, file=logfile)
