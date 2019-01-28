@@ -21,13 +21,17 @@ def main():
 
     print("Using device:", device)
     # Hyper parameters
-    num_epochs = 50
+    num_epochs = 5
     num_classes = 2
-    batch_size = 64
+    batch_size_train = 64
+    batch_size_eval = 256
     learning_rate = 0.001
 
     print("Indexing training and test examples...")
-    train_loader, validation_loader, test_loader = utils.get_kaggle_data_loaders()
+    train_loader, validation_loader, test_loader = utils.get_kaggle_data_loaders(
+        batch_size_train=batch_size_train,
+        batch_size_eval=batch_size_eval
+    )
 
     model = neuralnets.KaggleNet(num_classes).to(device)
 
@@ -53,7 +57,7 @@ def main():
     best_validation_accuracy = 0.0
     best_model_path = "best_model.bak"
     for epoch in range(num_epochs):
-        train(model, device, total_step, scheduler, train_loader, validation_loader, criterion, optimizer, batch_size, logfile, epoch, num_epochs)
+        train(model, device, total_step, scheduler, train_loader, validation_loader, criterion, optimizer, batch_size_train, logfile, epoch, num_epochs)
         validation_accuracy = validate(model, validation_loader, device, logfile)
 
         print("Epoch {} validation accuracy= {:.4f}".format(epoch + 1, validation_accuracy))

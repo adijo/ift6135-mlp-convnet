@@ -11,10 +11,7 @@ from sklearn.metrics import classification_report
 from kaggle.datasets import PictureDataset
 
 
-def get_kaggle_data_loaders():
-    batch_size_train = 64
-    batch_size_eval = 512
-
+def get_kaggle_data_loaders(batch_size_train, batch_size_eval):
     device, use_cuda = get_device()
 
     parent_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
