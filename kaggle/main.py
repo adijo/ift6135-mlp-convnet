@@ -11,9 +11,13 @@ import torch
 import torch.nn as nn
 from torch.optim.lr_scheduler import MultiStepLR
 
-import kaggle.neuralnets as neuralnets
-import kaggle.utils as utils
+import neuralnets as neuralnets
+import utils as utils
 
+#We can start from a pre-trained baseline.
+
+#start_file = "epoch22.pt"
+start_file = None
 
 def main():
     # Device configuration
@@ -21,10 +25,10 @@ def main():
 
     print("Using device:", device)
     # Hyper parameters
-    num_epochs = 5
+    num_epochs = 1 #For test before commit
     num_classes = 2
-    batch_size_train = 64
-    batch_size_eval = 256
+    batch_size_train = 100
+    batch_size_eval = 100
     learning_rate = 0.001
 
     print("Indexing training and test examples...")
@@ -34,6 +38,10 @@ def main():
     )
 
     model = neuralnets.KaggleNet(num_classes).to(device)
+
+    #Allows restarting from a save model. Just change the start_file path before launching.
+    if start_file:
+        model.load_state_dict(torch.load(start_file))
 
     # Logging functions. Will be used later for plotting graphs
     logfile_prefix = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H_%M_%S')
@@ -50,6 +58,7 @@ def main():
     print("Learning rate:", learning_rate, file=logfile)
     logfile.flush()
 
+    #Not sure if we're allowed to use the scheduler. 
     scheduler = MultiStepLR(optimizer, milestones=[20, 40], gamma=0.1)
 
     print("Training...")
@@ -78,7 +87,9 @@ def main():
     best_model = neuralnets.KaggleNet(num_classes).to(device)
     best_model.load_state_dict(torch.load(best_model_path))
 
-    predict_test_set_labels(best_model, test_loader, device)
+    # Please use "predict.py" for predictions. 
+
+    #predict_test_set_labels(best_model, test_loader, device)
 
 
 def train(model, device, total_step, scheduler, train_loader, validation_loader, criterion, optimizer, batch_size, logfile, epoch, num_epochs):
@@ -89,7 +100,7 @@ def train(model, device, total_step, scheduler, train_loader, validation_loader,
 
     correct = 0.0
     total = 0.0
-    for i, (images, labels) in enumerate(train_loader):
+    for i, (images, labels, image_files) in enumerate(train_loader):
         images = images.to(device, dtype=torch.float)
         labels = labels.to(device, dtype=torch.long)
 
@@ -125,7 +136,7 @@ def validate(model, validation_loader, device, logfile):
     with torch.no_grad():
         validation_correct = 0.0
         validation_total = 0.0
-        for images, labels in validation_loader:
+        for images, labels, image_files in validation_loader:
             validation_images = images.to(device, dtype=torch.float)
             validation_labels = labels.to(device, dtype=torch.long)
 
@@ -140,30 +151,32 @@ def validate(model, validation_loader, device, logfile):
 
     return validation_correct / validation_total
 
+# This code is replaced py predict.py.
+# It should be called manually on a saved model.
 
-def predict_test_set_labels(model, test_loader, device):
-    # Test the model. Set it into evaluation mode.
-    model.eval()
-
-    print("Predicting test set labels...")
-    predictions = []
-    with torch.no_grad():
-        for images, labels in test_loader:
-            images = images.to(device, dtype=torch.float)
-            outputs = model(images)
-            _, predicted = torch.max(outputs.data, 1)
-            predicted = predicted.cpu().numpy().tolist()
-            predictions += predicted
-
-    target_names = ["Dog", "Cat"]
-
-    predictions_file_prefix = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H_%M_%S')
-    predictions_file_path = os.path.join("predictions", predictions_file_prefix+".csv")
-    print("Saving predictions to {}".format(predictions_file_path))
-    with open(predictions_file_path, "w+") as predictions_file:
-        predictions_file.write("id,label\n")
-        for i in range(len(predictions)):
-            predictions_file.write("{},{}\n".format(str(i+1), target_names[predictions[i]]))
+# def predict_test_set_labels(model, test_loader, device):
+#     # Test the model. Set it into evaluation mode.
+#     model.eval()
+# 
+#     print("Predicting test set labels...")
+#     predictions = []
+#     with torch.no_grad():
+#         for images, labels in test_loader:
+#             images = images.to(device, dtype=torch.float)
+#             outputs = model(images)
+#             _, predicted = torch.max(outputs.data, 1)
+#             predicted = predicted.cpu().numpy().tolist()
+#             predictions += predicted
+# 
+#     target_names = ["Dog", "Cat"]
+# 
+#     predictions_file_prefix = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H_%M_%S')
+#     predictions_file_path = os.path.join("predictions", predictions_file_prefix+".csv")
+#     print("Saving predictions to {}".format(predictions_file_path))
+#     with open(predictions_file_path, "w+") as predictions_file:
+#         predictions_file.write("id,label\n")
+#         for i in range(len(predictions)):
+#             predictions_file.write("{},{}\n".format(str(i+1), target_names[predictions[i]]))
 
 
 if __name__ == '__main__':

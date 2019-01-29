@@ -8,15 +8,23 @@ from torch.utils.data import DataLoader
 from torch.utils.data.sampler import SubsetRandomSampler
 from sklearn.metrics import classification_report
 
-from kaggle.datasets import PictureDataset
+from datasets import PictureDataset
 
+def get_kaggle_test_loader(batch_size=100):
+    device, use_cuda = get_device()
+    parent_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    test_dataset = PictureDataset(os.path.join(parent_directory, "kaggle", "data", "testset"))
+    test_loader = DataLoader(
+        test_dataset, batch_size, pin_memory=use_cuda
+    )
+    return test_loader
 
 def get_kaggle_data_loaders(batch_size_train, batch_size_eval):
     device, use_cuda = get_device()
 
     parent_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     train_dataset = PictureDataset(os.path.join(parent_directory, "kaggle", "data", "trainset"))
-    test_dataset = PictureDataset(os.path.join(parent_directory, "kaggle", "data", "testset"))
+    
 
     # Shuffle the data and split it into a training and a validation set
     validation_split = 0.2
@@ -33,16 +41,15 @@ def get_kaggle_data_loaders(batch_size_train, batch_size_eval):
     validation_loader = DataLoader(
         train_dataset, batch_size=batch_size_eval, sampler=SubsetRandomSampler(validation_indices), pin_memory=use_cuda
     )
-    test_loader = DataLoader(
-        test_dataset, batch_size=batch_size_eval, pin_memory=use_cuda
-    )
-
+    #test_loader = DataLoader(
+    #    test_dataset, batch_size=batch_size_eval, pin_memory=use_cuda
+    #)
+    test_loader = get_kaggle_test_loader(batch_size_eval)
     return train_loader, validation_loader, test_loader
 
 
 def print_score(which, y_true, y_predicted, logfile):
     target_names = ["Dog", "Cat"]
-
     print(which + "Score:")
     print(which + "Score:", file=logfile)
     print(classification_report(y_true, y_predicted, target_names=target_names))

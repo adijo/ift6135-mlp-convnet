@@ -24,8 +24,11 @@ class PictureDataset(Dataset):
         self.root_dir = root_dir
         self.image_names = numpy.array([])
         self.labels = numpy.array([])
+
         for path, sub_directories, files in os.walk(root_dir):
             for image_name in files:
+                if not ".jpg" in image_name:
+                    continue
                 self.image_names = numpy.append(self.image_names, image_name)
                 if training_set:
                     self.labels = numpy.append(self.labels, label_string_to_id(image_name.split(".")[1]))
@@ -37,6 +40,8 @@ class PictureDataset(Dataset):
 
     def __getitem__(self, img_index):
         # Load image
+
+        #On linux, this will only work if all the files (#.Cat.jpg and #.Dog.jpg are in the same folder.)
         image = io.imread(os.path.join(self.root_dir, self.image_names[img_index]))
 
         # Convert from gray scale (1 channel) to RGB (3 channels) if needed
@@ -48,8 +53,8 @@ class PictureDataset(Dataset):
         # torch image: C X H X W
         image = image.transpose((2, 0, 1))
         label = self.labels[img_index]
-
-        return image, label
+        image_name = self.image_names[img_index]
+        return image, label, image_name
 
 
 def label_string_to_id(string):
