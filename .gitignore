@@ -1,6 +1,8 @@
-# Problem 3 data sets
-problem3/data/trainset/
-problem3/data/testset/
+# Kaggle
+kaggle/data/trainset/
+kaggle/data/testset/
+kaggle/*.bak
+kaggle/*.ckpt
 
 # Pycharm
 .idea/
