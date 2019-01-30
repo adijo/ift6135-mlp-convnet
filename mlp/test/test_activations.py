@@ -1,4 +1,5 @@
 from activations import Activation, ReLU, Softmax
+from literals.activations import ActivationLiterals
 import unittest
 import numpy as np
 from nose.tools import raises
@@ -7,7 +8,7 @@ from nose.tools import raises
 class TestActivation(unittest.TestCase):
     def test_relu_instantiation(self):
         # Given
-        relu = Activation.from_activation_name("relu")
+        relu = Activation.from_activation_name(ActivationLiterals.RELU)
 
         # Then
         self.assertIsInstance(relu, ReLU)
@@ -15,7 +16,7 @@ class TestActivation(unittest.TestCase):
     def test_softmax_instantiation(self):
 
         # Given
-        softmax = Activation.from_activation_name("softmax")
+        softmax = Activation.from_activation_name(ActivationLiterals.SOFTMAX)
 
         # Then
         self.assertIsInstance(softmax, Softmax)
@@ -62,7 +63,7 @@ class TestActivation(unittest.TestCase):
 
         # Then
         sum_of_columns = 4.0
-        self.assertEqual(sum_of_columns, np.sum(np.sum(activation, axis=0)))
+        self.assertTrue(np.isclose(sum_of_columns, np.sum(np.sum(activation, axis=0), 1e-3)))
 
     def test_softmax_calculate_gradient(self):
         # Given

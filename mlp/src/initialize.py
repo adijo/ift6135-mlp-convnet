@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import numpy as np
+from literals.initialization import InitLiterals
 
 
 class AbstractInitialization(ABC):
@@ -12,12 +13,11 @@ class AbstractInitialization(ABC):
         pass
 
 
-def initialize_weights(in_dim, out_dim, method_name, seed=10):
-    np.random.seed(seed)
+def initialize_weights(in_dim, out_dim, method_name):
     initializations = {
-        "zero": Zero(),
-        "normal": Normal(),
-        "glorot": Glorot()
+        InitLiterals.ZERO: Zero(),
+        InitLiterals.NORMAL: Normal(),
+        InitLiterals.GLOROT: Glorot()
     }
 
     if method_name not in initializations:
@@ -28,14 +28,15 @@ def initialize_weights(in_dim, out_dim, method_name, seed=10):
 
 class Zero(AbstractInitialization):
     def initialize(self, in_dim, out_dim):
-        return np.zeros(shape=(in_dim, out_dim))
+        return np.zeros(shape=(out_dim, in_dim))
 
 
 class Normal(AbstractInitialization):
     def initialize(self, in_dim, out_dim):
-        return np.array([[np.random.standard_normal() for _ in range(out_dim)] for _ in range(in_dim)])
+        return np.array([[np.random.standard_normal() for _ in range(in_dim)] for _ in range(out_dim)])
 
 
 class Glorot(AbstractInitialization):
     def initialize(self, in_dim, out_dim):
-        pass
+        d = np.sqrt(6 / (in_dim + out_dim))
+        return np.array([[np.random.uniform(-d, d) for _ in range(in_dim)] for _ in range(out_dim)])
