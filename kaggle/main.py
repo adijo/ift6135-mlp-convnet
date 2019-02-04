@@ -16,8 +16,13 @@ import utils as utils
 
 #We can start from a pre-trained baseline.
 
-#start_file = "epoch22.pt"
+
+
+#save_each_epoch = False
+save_each_epoch= True
 start_file = None
+
+#start_file = "2019-02-03-19_59_44_epoch49"
 
 def main():
     # Device configuration
@@ -25,11 +30,11 @@ def main():
 
     print("Using device:", device)
     # Hyper parameters
-    num_epochs = 1 #For test before commit
+    num_epochs = 50 #For test before commit
     num_classes = 2
-    batch_size_train = 100
-    batch_size_eval = 100
-    learning_rate = 0.001
+    batch_size_train = 64
+    batch_size_eval = 64
+    learning_rate = 0.1
 
     print("Indexing training and test examples...")
     train_loader, validation_loader, test_loader = utils.get_kaggle_data_loaders(
@@ -37,7 +42,7 @@ def main():
         batch_size_eval=batch_size_eval
     )
 
-    model = neuralnets.KaggleNet(num_classes).to(device)
+    model = neuralnets.KaggleNetSimple(num_classes).to(device)
 
     #Allows restarting from a save model. Just change the start_file path before launching.
     if start_file:
@@ -76,6 +81,9 @@ def main():
         if validation_accuracy > best_validation_accuracy:
             best_validation_accuracy = validation_accuracy
             torch.save(model.state_dict(), best_model_path)
+        # We also preserve all iterations of the model, if we prefer.
+        if save_each_epoch:
+            torch.save(model.state_dict(),logfile_prefix+"_epoch"+str(epoch))
 
     print("Training complete.")
     print("The model that scored the highest validation accuracy {}% was preserved and will be used for predictions.".format(best_validation_accuracy*100))
@@ -84,8 +92,8 @@ def main():
     del model
     torch.cuda.empty_cache()
 
-    best_model = neuralnets.KaggleNet(num_classes).to(device)
-    best_model.load_state_dict(torch.load(best_model_path))
+    #best_model = neuralnets.KaggleNet(num_classes).to(device)
+    #best_model.load_state_dict(torch.load(best_model_path))
 
     # Please use "predict.py" for predictions. 
 

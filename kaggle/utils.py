@@ -8,22 +8,30 @@ from torch.utils.data import DataLoader
 from torch.utils.data.sampler import SubsetRandomSampler
 from sklearn.metrics import classification_report
 
+from torchvision import transforms, datasets
+
 from datasets import PictureDataset
 
 def get_kaggle_test_loader(batch_size=100):
     device, use_cuda = get_device()
     parent_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    test_dataset = PictureDataset(os.path.join(parent_directory, "kaggle", "data", "testset"))
+    test_dataset = PictureDataset(os.path.join(parent_directory, "kaggle", "data", "testset"), transform=transforms.ToTensor())
     test_loader = DataLoader(
         test_dataset, batch_size, pin_memory=use_cuda
     )
     return test_loader
 
+#Using data augmentation from TorchVision: https://pytorch.org/tutorials/beginner/data_loading_tutorial.html
+#https://pytorch.org/docs/stable/torchvision/transforms.html
+
 def get_kaggle_data_loaders(batch_size_train, batch_size_eval):
     device, use_cuda = get_device()
 
     parent_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    train_dataset = PictureDataset(os.path.join(parent_directory, "kaggle", "data", "trainset"))
+    train_dataset = PictureDataset(os.path.join(parent_directory, "kaggle", "data", "trainset"),transforms.Compose([
+        transforms.RandomHorizontalFlip(),
+        transforms.RandomResizedCrop(64,(0.8,1.0)),
+        transforms.ToTensor()]))
     
 
     # Shuffle the data and split it into a training and a validation set

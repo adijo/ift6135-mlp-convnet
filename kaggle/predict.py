@@ -10,7 +10,7 @@ import torch.nn as nn
 import neuralnets as neuralnets
 import utils as utils
 
-start_file = "epoch22.pt"
+start_file = "best_feb3.pt"
 num_classes = 2
 
 def main():
@@ -19,7 +19,7 @@ def main():
     print("Using device:", device)
     print("Indexing test examples...")
     test_loader = utils.get_kaggle_test_loader()
-    best_model = neuralnets.KaggleNet(num_classes).to(device)
+    best_model = neuralnets.KaggleNetSimple(num_classes).to(device)
     best_model.load_state_dict(torch.load(start_file))
     predict_test_set_labels(best_model, test_loader, device)
 
