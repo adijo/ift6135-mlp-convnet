@@ -1,0 +1,1436 @@
+KaggleNetSimple(
+  (layer1): Sequential(
+    (0): Conv2d(3, 96, kernel_size=(3, 3), stride=(1, 1))
+    (1): ReLU()
+  )
+  (layer2): Sequential(
+    (0): Conv2d(96, 96, kernel_size=(3, 3), stride=(1, 1))
+    (1): ReLU()
+  )
+  (layer3): Sequential(
+    (0): Conv2d(96, 96, kernel_size=(3, 3), stride=(2, 2))
+    (1): ReLU()
+  )
+  (layer4): Sequential(
+    (0): Conv2d(96, 192, kernel_size=(3, 3), stride=(1, 1))
+    (1): ReLU()
+  )
+  (layer5): Sequential(
+    (0): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1))
+    (1): ReLU()
+  )
+  (layer6): Sequential(
+    (0): Conv2d(192, 192, kernel_size=(3, 3), stride=(2, 2))
+    (1): ReLU()
+  )
+  (fc): Linear(in_features=27648, out_features=2, bias=True)
+)
+SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.1
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+)
+Learning rate: 0.1
+Epoch [1/50], Step [32/250], Loss: 0.6920, Accuracy:0.50
+Epoch [1/50], Step [64/250], Loss: 0.6928, Accuracy:0.49
+Epoch [1/50], Step [96/250], Loss: 0.6892, Accuracy:0.50
+Epoch [1/50], Step [128/250], Loss: 0.6893, Accuracy:0.50
+Epoch [1/50], Step [160/250], Loss: 0.6979, Accuracy:0.50
+Epoch [1/50], Step [192/250], Loss: 0.6918, Accuracy:0.50
+Epoch [1/50], Step [224/250], Loss: 0.6920, Accuracy:0.51
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.51      0.59      0.55      8008
+         Cat       0.51      0.43      0.46      7991
+
+   micro avg       0.51      0.51      0.51     15999
+   macro avg       0.51      0.51      0.51     15999
+weighted avg       0.51      0.51      0.51     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.00      0.00      0.00         0
+         Cat       1.00      0.50      0.67      3999
+
+   micro avg       0.50      0.50      0.50      3999
+   macro avg       0.50      0.25      0.33      3999
+weighted avg       1.00      0.50      0.67      3999
+
+Epoch 1 validation accuracy= 0.5021 validation loss= 0.7077
+Epoch [2/50], Step [32/250], Loss: 0.6886, Accuracy:0.53
+Epoch [2/50], Step [64/250], Loss: 0.7072, Accuracy:0.54
+Epoch [2/50], Step [96/250], Loss: 0.6942, Accuracy:0.54
+Epoch [2/50], Step [128/250], Loss: 0.6708, Accuracy:0.55
+Epoch [2/50], Step [160/250], Loss: 0.6790, Accuracy:0.55
+Epoch [2/50], Step [192/250], Loss: 0.6959, Accuracy:0.55
+Epoch [2/50], Step [224/250], Loss: 0.6780, Accuracy:0.55
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.55      0.56      0.55      8008
+         Cat       0.55      0.54      0.55      7991
+
+   micro avg       0.55      0.55      0.55     15999
+   macro avg       0.55      0.55      0.55     15999
+weighted avg       0.55      0.55      0.55     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.59      0.55      0.57      2138
+         Cat       0.52      0.56      0.54      1861
+
+   micro avg       0.56      0.56      0.56      3999
+   macro avg       0.56      0.56      0.56      3999
+weighted avg       0.56      0.56      0.56      3999
+
+Epoch 2 validation accuracy= 0.5576 validation loss= 0.6422
+Epoch [3/50], Step [32/250], Loss: 0.6621, Accuracy:0.56
+Epoch [3/50], Step [64/250], Loss: 0.6658, Accuracy:0.56
+Epoch [3/50], Step [96/250], Loss: 0.6544, Accuracy:0.56
+Epoch [3/50], Step [128/250], Loss: 0.6522, Accuracy:0.57
+Epoch [3/50], Step [160/250], Loss: 0.6708, Accuracy:0.57
+Epoch [3/50], Step [192/250], Loss: 0.6697, Accuracy:0.57
+Epoch [3/50], Step [224/250], Loss: 0.6789, Accuracy:0.57
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.56      0.64      0.60      8008
+         Cat       0.58      0.49      0.53      7991
+
+   micro avg       0.57      0.57      0.57     15999
+   macro avg       0.57      0.57      0.56     15999
+weighted avg       0.57      0.57      0.56     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.44      0.60      0.51      1468
+         Cat       0.71      0.56      0.62      2531
+
+   micro avg       0.57      0.57      0.57      3999
+   macro avg       0.57      0.58      0.57      3999
+weighted avg       0.61      0.57      0.58      3999
+
+Epoch 3 validation accuracy= 0.5731 validation loss= 0.6742
+Epoch [4/50], Step [32/250], Loss: 0.6444, Accuracy:0.58
+Epoch [4/50], Step [64/250], Loss: 0.9539, Accuracy:0.58
+Epoch [4/50], Step [96/250], Loss: 0.6934, Accuracy:0.57
+Epoch [4/50], Step [128/250], Loss: 0.6687, Accuracy:0.57
+Epoch [4/50], Step [160/250], Loss: 0.7224, Accuracy:0.57
+Epoch [4/50], Step [192/250], Loss: 0.6704, Accuracy:0.57
+Epoch [4/50], Step [224/250], Loss: 0.6474, Accuracy:0.58
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.57      0.66      0.61      8008
+         Cat       0.59      0.50      0.54      7991
+
+   micro avg       0.58      0.58      0.58     15999
+   macro avg       0.58      0.58      0.57     15999
+weighted avg       0.58      0.58      0.57     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.45      0.63      0.53      1434
+         Cat       0.74      0.58      0.65      2565
+
+   micro avg       0.60      0.60      0.60      3999
+   macro avg       0.60      0.60      0.59      3999
+weighted avg       0.64      0.60      0.60      3999
+
+Epoch 4 validation accuracy= 0.5961 validation loss= 0.5911
+Epoch [5/50], Step [32/250], Loss: 0.6331, Accuracy:0.60
+Epoch [5/50], Step [64/250], Loss: 0.6427, Accuracy:0.60
+Epoch [5/50], Step [96/250], Loss: 0.7019, Accuracy:0.61
+Epoch [5/50], Step [128/250], Loss: 0.7135, Accuracy:0.61
+Epoch [5/50], Step [160/250], Loss: 0.7140, Accuracy:0.61
+Epoch [5/50], Step [192/250], Loss: 0.6897, Accuracy:0.61
+Epoch [5/50], Step [224/250], Loss: 0.6931, Accuracy:0.61
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.61      0.64      0.63      8008
+         Cat       0.62      0.59      0.61      7991
+
+   micro avg       0.62      0.62      0.62     15999
+   macro avg       0.62      0.62      0.62     15999
+weighted avg       0.62      0.62      0.62     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.45      0.66      0.53      1341
+         Cat       0.78      0.59      0.67      2658
+
+   micro avg       0.61      0.61      0.61      3999
+   macro avg       0.61      0.62      0.60      3999
+weighted avg       0.67      0.61      0.62      3999
+
+Epoch 5 validation accuracy= 0.6119 validation loss= 0.7009
+Epoch [6/50], Step [32/250], Loss: 0.6103, Accuracy:0.62
+Epoch [6/50], Step [64/250], Loss: 0.5815, Accuracy:0.63
+Epoch [6/50], Step [96/250], Loss: 0.6425, Accuracy:0.63
+Epoch [6/50], Step [128/250], Loss: 0.5910, Accuracy:0.63
+Epoch [6/50], Step [160/250], Loss: 0.6958, Accuracy:0.63
+Epoch [6/50], Step [192/250], Loss: 0.5698, Accuracy:0.64
+Epoch [6/50], Step [224/250], Loss: 0.6423, Accuracy:0.64
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.64      0.64      0.64      8008
+         Cat       0.64      0.64      0.64      7991
+
+   micro avg       0.64      0.64      0.64     15999
+   macro avg       0.64      0.64      0.64     15999
+weighted avg       0.64      0.64      0.64     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.86      0.58      0.70      2930
+         Cat       0.39      0.74      0.51      1069
+
+   micro avg       0.63      0.63      0.63      3999
+   macro avg       0.63      0.66      0.61      3999
+weighted avg       0.74      0.63      0.65      3999
+
+Epoch 6 validation accuracy= 0.6262 validation loss= 0.6545
+Epoch [7/50], Step [32/250], Loss: 0.5636, Accuracy:0.67
+Epoch [7/50], Step [64/250], Loss: 0.6199, Accuracy:0.67
+Epoch [7/50], Step [96/250], Loss: 0.6114, Accuracy:0.67
+Epoch [7/50], Step [128/250], Loss: 0.6591, Accuracy:0.67
+Epoch [7/50], Step [160/250], Loss: 0.6106, Accuracy:0.67
+Epoch [7/50], Step [192/250], Loss: 0.6956, Accuracy:0.67
+Epoch [7/50], Step [224/250], Loss: 0.6208, Accuracy:0.67
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.67      0.65      0.66      8008
+         Cat       0.66      0.68      0.67      7991
+
+   micro avg       0.67      0.67      0.67     15999
+   macro avg       0.67      0.67      0.67     15999
+weighted avg       0.67      0.67      0.67     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.54      0.69      0.61      1553
+         Cat       0.76      0.63      0.69      2446
+
+   micro avg       0.65      0.65      0.65      3999
+   macro avg       0.65      0.66      0.65      3999
+weighted avg       0.68      0.65      0.66      3999
+
+Epoch 7 validation accuracy= 0.6519 validation loss= 0.6268
+Epoch [8/50], Step [32/250], Loss: 0.7079, Accuracy:0.68
+Epoch [8/50], Step [64/250], Loss: 0.5367, Accuracy:0.68
+Epoch [8/50], Step [96/250], Loss: 0.6467, Accuracy:0.68
+Epoch [8/50], Step [128/250], Loss: 0.5943, Accuracy:0.68
+Epoch [8/50], Step [160/250], Loss: 0.6907, Accuracy:0.68
+Epoch [8/50], Step [192/250], Loss: 0.6169, Accuracy:0.68
+Epoch [8/50], Step [224/250], Loss: 0.5220, Accuracy:0.68
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.69      0.66      0.68      8008
+         Cat       0.67      0.70      0.69      7991
+
+   micro avg       0.68      0.68      0.68     15999
+   macro avg       0.68      0.68      0.68     15999
+weighted avg       0.68      0.68      0.68     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.85      0.62      0.72      2706
+         Cat       0.49      0.77      0.60      1293
+
+   micro avg       0.67      0.67      0.67      3999
+   macro avg       0.67      0.69      0.66      3999
+weighted avg       0.73      0.67      0.68      3999
+
+Epoch 8 validation accuracy= 0.6697 validation loss= 0.6457
+Epoch [9/50], Step [32/250], Loss: 0.6036, Accuracy:0.69
+Epoch [9/50], Step [64/250], Loss: 0.5228, Accuracy:0.69
+Epoch [9/50], Step [96/250], Loss: 0.6608, Accuracy:0.70
+Epoch [9/50], Step [128/250], Loss: 0.5548, Accuracy:0.70
+Epoch [9/50], Step [160/250], Loss: 0.5637, Accuracy:0.70
+Epoch [9/50], Step [192/250], Loss: 0.5188, Accuracy:0.70
+Epoch [9/50], Step [224/250], Loss: 0.6210, Accuracy:0.70
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.71      0.69      0.70      8008
+         Cat       0.70      0.71      0.70      7991
+
+   micro avg       0.70      0.70      0.70     15999
+   macro avg       0.70      0.70      0.70     15999
+weighted avg       0.70      0.70      0.70     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.78      0.67      0.72      2326
+         Cat       0.61      0.74      0.67      1673
+
+   micro avg       0.70      0.70      0.70      3999
+   macro avg       0.70      0.70      0.69      3999
+weighted avg       0.71      0.70      0.70      3999
+
+Epoch 9 validation accuracy= 0.6957 validation loss= 0.5627
+Epoch [10/50], Step [32/250], Loss: 0.5076, Accuracy:0.71
+Epoch [10/50], Step [64/250], Loss: 0.5395, Accuracy:0.72
+Epoch [10/50], Step [96/250], Loss: 0.6942, Accuracy:0.72
+Epoch [10/50], Step [128/250], Loss: 0.5489, Accuracy:0.72
+Epoch [10/50], Step [160/250], Loss: 0.5662, Accuracy:0.72
+Epoch [10/50], Step [192/250], Loss: 0.6354, Accuracy:0.72
+Epoch [10/50], Step [224/250], Loss: 0.6163, Accuracy:0.71
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.72      0.70      0.71      8008
+         Cat       0.71      0.73      0.72      7991
+
+   micro avg       0.71      0.71      0.71     15999
+   macro avg       0.71      0.71      0.71     15999
+weighted avg       0.71      0.71      0.71     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.54      0.78      0.64      1371
+         Cat       0.85      0.65      0.74      2628
+
+   micro avg       0.70      0.70      0.70      3999
+   macro avg       0.70      0.72      0.69      3999
+weighted avg       0.75      0.70      0.70      3999
+
+Epoch 10 validation accuracy= 0.6969 validation loss= 0.5563
+Epoch [11/50], Step [32/250], Loss: 0.5934, Accuracy:0.73
+Epoch [11/50], Step [64/250], Loss: 0.6603, Accuracy:0.73
+Epoch [11/50], Step [96/250], Loss: 0.5426, Accuracy:0.73
+Epoch [11/50], Step [128/250], Loss: 0.5397, Accuracy:0.73
+Epoch [11/50], Step [160/250], Loss: 0.4060, Accuracy:0.73
+Epoch [11/50], Step [192/250], Loss: 0.6280, Accuracy:0.73
+Epoch [11/50], Step [224/250], Loss: 0.5511, Accuracy:0.73
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.74      0.71      0.72      8008
+         Cat       0.72      0.75      0.73      7991
+
+   micro avg       0.73      0.73      0.73     15999
+   macro avg       0.73      0.73      0.73     15999
+weighted avg       0.73      0.73      0.73     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.79      0.69      0.74      2283
+         Cat       0.65      0.76      0.70      1716
+
+   micro avg       0.72      0.72      0.72      3999
+   macro avg       0.72      0.72      0.72      3999
+weighted avg       0.73      0.72      0.72      3999
+
+Epoch 11 validation accuracy= 0.7169 validation loss= 0.7039
+Epoch [12/50], Step [32/250], Loss: 0.5835, Accuracy:0.74
+Epoch [12/50], Step [64/250], Loss: 0.5235, Accuracy:0.74
+Epoch [12/50], Step [96/250], Loss: 0.4935, Accuracy:0.74
+Epoch [12/50], Step [128/250], Loss: 0.4621, Accuracy:0.74
+Epoch [12/50], Step [160/250], Loss: 0.5293, Accuracy:0.74
+Epoch [12/50], Step [192/250], Loss: 0.5115, Accuracy:0.74
+Epoch [12/50], Step [224/250], Loss: 0.5414, Accuracy:0.74
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.74      0.72      0.73      8008
+         Cat       0.73      0.75      0.74      7991
+
+   micro avg       0.74      0.74      0.74     15999
+   macro avg       0.74      0.74      0.74     15999
+weighted avg       0.74      0.74      0.74     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.65      0.77      0.71      1678
+         Cat       0.81      0.70      0.75      2321
+
+   micro avg       0.73      0.73      0.73      3999
+   macro avg       0.73      0.74      0.73      3999
+weighted avg       0.74      0.73      0.73      3999
+
+Epoch 12 validation accuracy= 0.7322 validation loss= 0.4583
+Epoch [13/50], Step [32/250], Loss: 0.5567, Accuracy:0.74
+Epoch [13/50], Step [64/250], Loss: 0.3697, Accuracy:0.74
+Epoch [13/50], Step [96/250], Loss: 0.4890, Accuracy:0.74
+Epoch [13/50], Step [128/250], Loss: 0.5773, Accuracy:0.74
+Epoch [13/50], Step [160/250], Loss: 0.5394, Accuracy:0.74
+Epoch [13/50], Step [192/250], Loss: 0.5267, Accuracy:0.74
+Epoch [13/50], Step [224/250], Loss: 0.4812, Accuracy:0.74
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.75      0.73      0.74      8008
+         Cat       0.74      0.76      0.75      7991
+
+   micro avg       0.74      0.74      0.74     15999
+   macro avg       0.74      0.74      0.74     15999
+weighted avg       0.74      0.74      0.74     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.76      0.73      0.74      2054
+         Cat       0.73      0.75      0.74      1945
+
+   micro avg       0.74      0.74      0.74      3999
+   macro avg       0.74      0.74      0.74      3999
+weighted avg       0.74      0.74      0.74      3999
+
+Epoch 13 validation accuracy= 0.7417 validation loss= 0.5768
+Epoch [14/50], Step [32/250], Loss: 0.4855, Accuracy:0.76
+Epoch [14/50], Step [64/250], Loss: 0.5456, Accuracy:0.75
+Epoch [14/50], Step [96/250], Loss: 0.5814, Accuracy:0.76
+Epoch [14/50], Step [128/250], Loss: 0.4611, Accuracy:0.75
+Epoch [14/50], Step [160/250], Loss: 0.6075, Accuracy:0.75
+Epoch [14/50], Step [192/250], Loss: 0.5079, Accuracy:0.76
+Epoch [14/50], Step [224/250], Loss: 0.4934, Accuracy:0.75
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.76      0.74      0.75      8008
+         Cat       0.75      0.77      0.76      7991
+
+   micro avg       0.76      0.76      0.76     15999
+   macro avg       0.76      0.76      0.76     15999
+weighted avg       0.76      0.76      0.76     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.58      0.82      0.68      1416
+         Cat       0.87      0.68      0.76      2583
+
+   micro avg       0.73      0.73      0.73      3999
+   macro avg       0.73      0.75      0.72      3999
+weighted avg       0.77      0.73      0.74      3999
+
+Epoch 14 validation accuracy= 0.7297 validation loss= 0.3654
+Epoch [15/50], Step [32/250], Loss: 0.5650, Accuracy:0.75
+Epoch [15/50], Step [64/250], Loss: 0.4942, Accuracy:0.76
+Epoch [15/50], Step [96/250], Loss: 0.5315, Accuracy:0.76
+Epoch [15/50], Step [128/250], Loss: 0.5666, Accuracy:0.77
+Epoch [15/50], Step [160/250], Loss: 0.5486, Accuracy:0.77
+Epoch [15/50], Step [192/250], Loss: 0.4803, Accuracy:0.77
+Epoch [15/50], Step [224/250], Loss: 0.5662, Accuracy:0.76
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.78      0.75      0.76      8008
+         Cat       0.76      0.78      0.77      7991
+
+   micro avg       0.77      0.77      0.77     15999
+   macro avg       0.77      0.77      0.77     15999
+weighted avg       0.77      0.77      0.77     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.90      0.59      0.71      3045
+         Cat       0.38      0.79      0.51       954
+
+   micro avg       0.64      0.64      0.64      3999
+   macro avg       0.64      0.69      0.61      3999
+weighted avg       0.78      0.64      0.66      3999
+
+Epoch 15 validation accuracy= 0.6369 validation loss= 0.8008
+Epoch [16/50], Step [32/250], Loss: 0.4263, Accuracy:0.76
+Epoch [16/50], Step [64/250], Loss: 0.5879, Accuracy:0.76
+Epoch [16/50], Step [96/250], Loss: 0.5022, Accuracy:0.77
+Epoch [16/50], Step [128/250], Loss: 0.5217, Accuracy:0.77
+Epoch [16/50], Step [160/250], Loss: 0.5038, Accuracy:0.77
+Epoch [16/50], Step [192/250], Loss: 0.3614, Accuracy:0.77
+Epoch [16/50], Step [224/250], Loss: 0.4533, Accuracy:0.77
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.77      0.75      0.76      8008
+         Cat       0.76      0.78      0.77      7991
+
+   micro avg       0.77      0.77      0.77     15999
+   macro avg       0.77      0.77      0.77     15999
+weighted avg       0.77      0.77      0.77     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.66      0.81      0.73      1635
+         Cat       0.84      0.71      0.77      2364
+
+   micro avg       0.75      0.75      0.75      3999
+   macro avg       0.75      0.76      0.75      3999
+weighted avg       0.77      0.75      0.75      3999
+
+Epoch 16 validation accuracy= 0.7519 validation loss= 0.4488
+Epoch [17/50], Step [32/250], Loss: 0.6432, Accuracy:0.78
+Epoch [17/50], Step [64/250], Loss: 0.4421, Accuracy:0.78
+Epoch [17/50], Step [96/250], Loss: 0.4570, Accuracy:0.78
+Epoch [17/50], Step [128/250], Loss: 0.3724, Accuracy:0.78
+Epoch [17/50], Step [160/250], Loss: 0.5277, Accuracy:0.78
+Epoch [17/50], Step [192/250], Loss: 0.4810, Accuracy:0.78
+Epoch [17/50], Step [224/250], Loss: 0.6044, Accuracy:0.78
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.79      0.76      0.77      8008
+         Cat       0.77      0.79      0.78      7991
+
+   micro avg       0.78      0.78      0.78     15999
+   macro avg       0.78      0.78      0.78     15999
+weighted avg       0.78      0.78      0.78     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.72      0.81      0.76      1791
+         Cat       0.83      0.75      0.79      2208
+
+   micro avg       0.78      0.78      0.78      3999
+   macro avg       0.78      0.78      0.78      3999
+weighted avg       0.78      0.78      0.78      3999
+
+Epoch 17 validation accuracy= 0.7759 validation loss= 0.5028
+Epoch [18/50], Step [32/250], Loss: 0.4473, Accuracy:0.80
+Epoch [18/50], Step [64/250], Loss: 0.2948, Accuracy:0.80
+Epoch [18/50], Step [96/250], Loss: 0.4871, Accuracy:0.79
+Epoch [18/50], Step [128/250], Loss: 0.4163, Accuracy:0.78
+Epoch [18/50], Step [160/250], Loss: 0.5254, Accuracy:0.78
+Epoch [18/50], Step [192/250], Loss: 0.5600, Accuracy:0.78
+Epoch [18/50], Step [224/250], Loss: 0.5271, Accuracy:0.78
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.79      0.77      0.78      8008
+         Cat       0.77      0.80      0.79      7991
+
+   micro avg       0.78      0.78      0.78     15999
+   macro avg       0.78      0.78      0.78     15999
+weighted avg       0.78      0.78      0.78     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.67      0.83      0.74      1610
+         Cat       0.86      0.72      0.79      2389
+
+   micro avg       0.77      0.77      0.77      3999
+   macro avg       0.77      0.78      0.76      3999
+weighted avg       0.78      0.77      0.77      3999
+
+Epoch 18 validation accuracy= 0.7657 validation loss= 0.4229
+Epoch [19/50], Step [32/250], Loss: 0.4415, Accuracy:0.79
+Epoch [19/50], Step [64/250], Loss: 0.5012, Accuracy:0.78
+Epoch [19/50], Step [96/250], Loss: 0.5377, Accuracy:0.79
+Epoch [19/50], Step [128/250], Loss: 0.4425, Accuracy:0.79
+Epoch [19/50], Step [160/250], Loss: 0.4481, Accuracy:0.79
+Epoch [19/50], Step [192/250], Loss: 0.5336, Accuracy:0.79
+Epoch [19/50], Step [224/250], Loss: 0.3651, Accuracy:0.79
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.80      0.77      0.78      8008
+         Cat       0.78      0.80      0.79      7991
+
+   micro avg       0.79      0.79      0.79     15999
+   macro avg       0.79      0.79      0.79     15999
+weighted avg       0.79      0.79      0.79     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.91      0.66      0.77      2731
+         Cat       0.54      0.86      0.67      1268
+
+   micro avg       0.73      0.73      0.73      3999
+   macro avg       0.73      0.76      0.72      3999
+weighted avg       0.79      0.73      0.74      3999
+
+Epoch 19 validation accuracy= 0.7269 validation loss= 0.5925
+Epoch [20/50], Step [32/250], Loss: 0.4069, Accuracy:0.79
+Epoch [20/50], Step [64/250], Loss: 0.5525, Accuracy:0.79
+Epoch [20/50], Step [96/250], Loss: 0.5200, Accuracy:0.79
+Epoch [20/50], Step [128/250], Loss: 0.4036, Accuracy:0.79
+Epoch [20/50], Step [160/250], Loss: 0.5148, Accuracy:0.79
+Epoch [20/50], Step [192/250], Loss: 0.4711, Accuracy:0.79
+Epoch [20/50], Step [224/250], Loss: 0.4241, Accuracy:0.79
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.80      0.77      0.78      8008
+         Cat       0.78      0.81      0.79      7991
+
+   micro avg       0.79      0.79      0.79     15999
+   macro avg       0.79      0.79      0.79     15999
+weighted avg       0.79      0.79      0.79     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.83      0.75      0.79      2218
+         Cat       0.72      0.81      0.76      1781
+
+   micro avg       0.78      0.78      0.78      3999
+   macro avg       0.78      0.78      0.78      3999
+weighted avg       0.78      0.78      0.78      3999
+
+Epoch 20 validation accuracy= 0.7762 validation loss= 0.3445
+Epoch [21/50], Step [32/250], Loss: 0.5221, Accuracy:0.80
+Epoch [21/50], Step [64/250], Loss: 0.4297, Accuracy:0.80
+Epoch [21/50], Step [96/250], Loss: 0.3888, Accuracy:0.80
+Epoch [21/50], Step [128/250], Loss: 0.4076, Accuracy:0.81
+Epoch [21/50], Step [160/250], Loss: 0.3307, Accuracy:0.81
+Epoch [21/50], Step [192/250], Loss: 0.4394, Accuracy:0.81
+Epoch [21/50], Step [224/250], Loss: 0.4068, Accuracy:0.82
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.82      0.80      0.81      8008
+         Cat       0.81      0.83      0.82      7991
+
+   micro avg       0.82      0.82      0.82     15999
+   macro avg       0.82      0.82      0.82     15999
+weighted avg       0.82      0.82      0.82     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.77      0.81      0.79      1894
+         Cat       0.82      0.78      0.80      2105
+
+   micro avg       0.79      0.79      0.79      3999
+   macro avg       0.79      0.79      0.79      3999
+weighted avg       0.79      0.79      0.79      3999
+
+Epoch 21 validation accuracy= 0.7922 validation loss= 0.4125
+Epoch [22/50], Step [32/250], Loss: 0.4628, Accuracy:0.83
+Epoch [22/50], Step [64/250], Loss: 0.4574, Accuracy:0.83
+Epoch [22/50], Step [96/250], Loss: 0.3455, Accuracy:0.83
+Epoch [22/50], Step [128/250], Loss: 0.2674, Accuracy:0.83
+Epoch [22/50], Step [160/250], Loss: 0.3926, Accuracy:0.83
+Epoch [22/50], Step [192/250], Loss: 0.4271, Accuracy:0.83
+Epoch [22/50], Step [224/250], Loss: 0.4236, Accuracy:0.83
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.83      0.82      0.82      8008
+         Cat       0.82      0.83      0.83      7991
+
+   micro avg       0.82      0.82      0.82     15999
+   macro avg       0.82      0.82      0.82     15999
+weighted avg       0.82      0.82      0.82     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.76      0.80      0.78      1894
+         Cat       0.81      0.77      0.79      2105
+
+   micro avg       0.79      0.79      0.79      3999
+   macro avg       0.79      0.79      0.79      3999
+weighted avg       0.79      0.79      0.79      3999
+
+Epoch 22 validation accuracy= 0.7852 validation loss= 0.3031
+Epoch [23/50], Step [32/250], Loss: 0.2987, Accuracy:0.83
+Epoch [23/50], Step [64/250], Loss: 0.4324, Accuracy:0.82
+Epoch [23/50], Step [96/250], Loss: 0.3336, Accuracy:0.82
+Epoch [23/50], Step [128/250], Loss: 0.3977, Accuracy:0.82
+Epoch [23/50], Step [160/250], Loss: 0.4246, Accuracy:0.82
+Epoch [23/50], Step [192/250], Loss: 0.4087, Accuracy:0.82
+Epoch [23/50], Step [224/250], Loss: 0.2967, Accuracy:0.82
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.83      0.82      0.83      8008
+         Cat       0.82      0.84      0.83      7991
+
+   micro avg       0.83      0.83      0.83     15999
+   macro avg       0.83      0.83      0.83     15999
+weighted avg       0.83      0.83      0.83     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.79      0.80      0.79      1951
+         Cat       0.81      0.79      0.80      2048
+
+   micro avg       0.80      0.80      0.80      3999
+   macro avg       0.80      0.80      0.80      3999
+weighted avg       0.80      0.80      0.80      3999
+
+Epoch 23 validation accuracy= 0.7969 validation loss= 0.5747
+Epoch [24/50], Step [32/250], Loss: 0.4318, Accuracy:0.83
+Epoch [24/50], Step [64/250], Loss: 0.3223, Accuracy:0.83
+Epoch [24/50], Step [96/250], Loss: 0.3207, Accuracy:0.83
+Epoch [24/50], Step [128/250], Loss: 0.3425, Accuracy:0.83
+Epoch [24/50], Step [160/250], Loss: 0.4018, Accuracy:0.82
+Epoch [24/50], Step [192/250], Loss: 0.4803, Accuracy:0.83
+Epoch [24/50], Step [224/250], Loss: 0.4279, Accuracy:0.83
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.83      0.82      0.82      8008
+         Cat       0.82      0.84      0.83      7991
+
+   micro avg       0.83      0.83      0.83     15999
+   macro avg       0.83      0.83      0.83     15999
+weighted avg       0.83      0.83      0.83     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.79      0.80      0.79      1977
+         Cat       0.80      0.79      0.80      2022
+
+   micro avg       0.80      0.80      0.80      3999
+   macro avg       0.80      0.80      0.80      3999
+weighted avg       0.80      0.80      0.80      3999
+
+Epoch 24 validation accuracy= 0.7959 validation loss= 0.5947
+Epoch [25/50], Step [32/250], Loss: 0.3417, Accuracy:0.83
+Epoch [25/50], Step [64/250], Loss: 0.4737, Accuracy:0.82
+Epoch [25/50], Step [96/250], Loss: 0.3631, Accuracy:0.82
+Epoch [25/50], Step [128/250], Loss: 0.4627, Accuracy:0.83
+Epoch [25/50], Step [160/250], Loss: 0.5671, Accuracy:0.82
+Epoch [25/50], Step [192/250], Loss: 0.3758, Accuracy:0.83
+Epoch [25/50], Step [224/250], Loss: 0.3979, Accuracy:0.83
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.84      0.82      0.83      8008
+         Cat       0.82      0.84      0.83      7991
+
+   micro avg       0.83      0.83      0.83     15999
+   macro avg       0.83      0.83      0.83     15999
+weighted avg       0.83      0.83      0.83     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.80      0.79      0.79      2025
+         Cat       0.78      0.80      0.79      1974
+
+   micro avg       0.79      0.79      0.79      3999
+   macro avg       0.79      0.79      0.79      3999
+weighted avg       0.79      0.79      0.79      3999
+
+Epoch 25 validation accuracy= 0.7919 validation loss= 0.2600
+Epoch [26/50], Step [32/250], Loss: 0.3378, Accuracy:0.82
+Epoch [26/50], Step [64/250], Loss: 0.4287, Accuracy:0.82
+Epoch [26/50], Step [96/250], Loss: 0.4155, Accuracy:0.82
+Epoch [26/50], Step [128/250], Loss: 0.3176, Accuracy:0.83
+Epoch [26/50], Step [160/250], Loss: 0.3563, Accuracy:0.83
+Epoch [26/50], Step [192/250], Loss: 0.3701, Accuracy:0.83
+Epoch [26/50], Step [224/250], Loss: 0.3670, Accuracy:0.83
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.84      0.81      0.82      8008
+         Cat       0.82      0.84      0.83      7991
+
+   micro avg       0.83      0.83      0.83     15999
+   macro avg       0.83      0.83      0.83     15999
+weighted avg       0.83      0.83      0.83     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.79      0.80      0.80      1955
+         Cat       0.81      0.79      0.80      2044
+
+   micro avg       0.80      0.80      0.80      3999
+   macro avg       0.80      0.80      0.80      3999
+weighted avg       0.80      0.80      0.80      3999
+
+Epoch 26 validation accuracy= 0.7989 validation loss= 0.4589
+Epoch [27/50], Step [32/250], Loss: 0.3689, Accuracy:0.83
+Epoch [27/50], Step [64/250], Loss: 0.4481, Accuracy:0.83
+Epoch [27/50], Step [96/250], Loss: 0.4850, Accuracy:0.82
+Epoch [27/50], Step [128/250], Loss: 0.3402, Accuracy:0.82
+Epoch [27/50], Step [160/250], Loss: 0.3713, Accuracy:0.83
+Epoch [27/50], Step [192/250], Loss: 0.2868, Accuracy:0.83
+Epoch [27/50], Step [224/250], Loss: 0.3116, Accuracy:0.83
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.84      0.82      0.83      8008
+         Cat       0.82      0.84      0.83      7991
+
+   micro avg       0.83      0.83      0.83     15999
+   macro avg       0.83      0.83      0.83     15999
+weighted avg       0.83      0.83      0.83     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.75      0.81      0.78      1844
+         Cat       0.83      0.77      0.80      2155
+
+   micro avg       0.79      0.79      0.79      3999
+   macro avg       0.79      0.79      0.79      3999
+weighted avg       0.79      0.79      0.79      3999
+
+Epoch 27 validation accuracy= 0.7917 validation loss= 0.4579
+Epoch [28/50], Step [32/250], Loss: 0.3783, Accuracy:0.84
+Epoch [28/50], Step [64/250], Loss: 0.3197, Accuracy:0.84
+Epoch [28/50], Step [96/250], Loss: 0.3455, Accuracy:0.83
+Epoch [28/50], Step [128/250], Loss: 0.3208, Accuracy:0.83
+Epoch [28/50], Step [160/250], Loss: 0.2634, Accuracy:0.84
+Epoch [28/50], Step [192/250], Loss: 0.2940, Accuracy:0.83
+Epoch [28/50], Step [224/250], Loss: 0.3604, Accuracy:0.83
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.84      0.82      0.83      8008
+         Cat       0.83      0.84      0.84      7991
+
+   micro avg       0.83      0.83      0.83     15999
+   macro avg       0.83      0.83      0.83     15999
+weighted avg       0.83      0.83      0.83     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.77      0.82      0.80      1875
+         Cat       0.83      0.79      0.81      2124
+
+   micro avg       0.80      0.80      0.80      3999
+   macro avg       0.80      0.81      0.80      3999
+weighted avg       0.81      0.80      0.81      3999
+
+Epoch 28 validation accuracy= 0.8050 validation loss= 0.4376
+Epoch [29/50], Step [32/250], Loss: 0.3528, Accuracy:0.83
+Epoch [29/50], Step [64/250], Loss: 0.5136, Accuracy:0.84
+Epoch [29/50], Step [96/250], Loss: 0.2838, Accuracy:0.84
+Epoch [29/50], Step [128/250], Loss: 0.3892, Accuracy:0.83
+Epoch [29/50], Step [160/250], Loss: 0.3149, Accuracy:0.83
+Epoch [29/50], Step [192/250], Loss: 0.3906, Accuracy:0.83
+Epoch [29/50], Step [224/250], Loss: 0.4205, Accuracy:0.83
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.84      0.82      0.83      8008
+         Cat       0.83      0.84      0.83      7991
+
+   micro avg       0.83      0.83      0.83     15999
+   macro avg       0.83      0.83      0.83     15999
+weighted avg       0.83      0.83      0.83     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.81      0.81      0.81      1984
+         Cat       0.82      0.81      0.82      2015
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.81      0.81      3999
+weighted avg       0.81      0.81      0.81      3999
+
+Epoch 29 validation accuracy= 0.8142 validation loss= 0.4419
+Epoch [30/50], Step [32/250], Loss: 0.3204, Accuracy:0.82
+Epoch [30/50], Step [64/250], Loss: 0.3761, Accuracy:0.83
+Epoch [30/50], Step [96/250], Loss: 0.4255, Accuracy:0.83
+Epoch [30/50], Step [128/250], Loss: 0.3816, Accuracy:0.83
+Epoch [30/50], Step [160/250], Loss: 0.4681, Accuracy:0.83
+Epoch [30/50], Step [192/250], Loss: 0.3665, Accuracy:0.83
+Epoch [30/50], Step [224/250], Loss: 0.3153, Accuracy:0.83
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.84      0.82      0.83      8008
+         Cat       0.82      0.84      0.83      7991
+
+   micro avg       0.83      0.83      0.83     15999
+   macro avg       0.83      0.83      0.83     15999
+weighted avg       0.83      0.83      0.83     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.74      0.84      0.78      1759
+         Cat       0.86      0.77      0.81      2240
+
+   micro avg       0.80      0.80      0.80      3999
+   macro avg       0.80      0.80      0.80      3999
+weighted avg       0.80      0.80      0.80      3999
+
+Epoch 30 validation accuracy= 0.7969 validation loss= 0.3892
+Epoch [31/50], Step [32/250], Loss: 0.3326, Accuracy:0.85
+Epoch [31/50], Step [64/250], Loss: 0.3498, Accuracy:0.84
+Epoch [31/50], Step [96/250], Loss: 0.3544, Accuracy:0.84
+Epoch [31/50], Step [128/250], Loss: 0.3107, Accuracy:0.84
+Epoch [31/50], Step [160/250], Loss: 0.3813, Accuracy:0.84
+Epoch [31/50], Step [192/250], Loss: 0.4334, Accuracy:0.84
+Epoch [31/50], Step [224/250], Loss: 0.4117, Accuracy:0.84
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.84      0.83      0.84      8008
+         Cat       0.83      0.85      0.84      7991
+
+   micro avg       0.84      0.84      0.84     15999
+   macro avg       0.84      0.84      0.84     15999
+weighted avg       0.84      0.84      0.84     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.80      0.79      0.80      2008
+         Cat       0.79      0.80      0.80      1991
+
+   micro avg       0.80      0.80      0.80      3999
+   macro avg       0.80      0.80      0.80      3999
+weighted avg       0.80      0.80      0.80      3999
+
+Epoch 31 validation accuracy= 0.7952 validation loss= 0.3974
+Epoch [32/50], Step [32/250], Loss: 0.4845, Accuracy:0.84
+Epoch [32/50], Step [64/250], Loss: 0.4491, Accuracy:0.84
+Epoch [32/50], Step [96/250], Loss: 0.3721, Accuracy:0.84
+Epoch [32/50], Step [128/250], Loss: 0.3447, Accuracy:0.84
+Epoch [32/50], Step [160/250], Loss: 0.4171, Accuracy:0.84
+Epoch [32/50], Step [192/250], Loss: 0.3431, Accuracy:0.84
+Epoch [32/50], Step [224/250], Loss: 0.4072, Accuracy:0.84
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.84      0.83      0.84      8008
+         Cat       0.83      0.84      0.84      7991
+
+   micro avg       0.84      0.84      0.84     15999
+   macro avg       0.84      0.84      0.84     15999
+weighted avg       0.84      0.84      0.84     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.81      0.80      0.81      2010
+         Cat       0.80      0.81      0.81      1989
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.81      0.81      3999
+weighted avg       0.81      0.81      0.81      3999
+
+Epoch 32 validation accuracy= 0.8082 validation loss= 0.5161
+Epoch [33/50], Step [32/250], Loss: 0.3638, Accuracy:0.85
+Epoch [33/50], Step [64/250], Loss: 0.4120, Accuracy:0.84
+Epoch [33/50], Step [96/250], Loss: 0.3183, Accuracy:0.84
+Epoch [33/50], Step [128/250], Loss: 0.3535, Accuracy:0.84
+Epoch [33/50], Step [160/250], Loss: 0.4147, Accuracy:0.84
+Epoch [33/50], Step [192/250], Loss: 0.2836, Accuracy:0.84
+Epoch [33/50], Step [224/250], Loss: 0.3665, Accuracy:0.84
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.85      0.83      0.84      8008
+         Cat       0.83      0.85      0.84      7991
+
+   micro avg       0.84      0.84      0.84     15999
+   macro avg       0.84      0.84      0.84     15999
+weighted avg       0.84      0.84      0.84     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.81      0.80      0.81      2013
+         Cat       0.80      0.81      0.81      1986
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.81      0.81      3999
+weighted avg       0.81      0.81      0.81      3999
+
+Epoch 33 validation accuracy= 0.8075 validation loss= 0.5491
+Epoch [34/50], Step [32/250], Loss: 0.3530, Accuracy:0.83
+Epoch [34/50], Step [64/250], Loss: 0.3312, Accuracy:0.84
+Epoch [34/50], Step [96/250], Loss: 0.4066, Accuracy:0.84
+Epoch [34/50], Step [128/250], Loss: 0.4016, Accuracy:0.84
+Epoch [34/50], Step [160/250], Loss: 0.3631, Accuracy:0.84
+Epoch [34/50], Step [192/250], Loss: 0.3373, Accuracy:0.84
+Epoch [34/50], Step [224/250], Loss: 0.5559, Accuracy:0.84
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.85      0.83      0.84      8008
+         Cat       0.83      0.85      0.84      7991
+
+   micro avg       0.84      0.84      0.84     15999
+   macro avg       0.84      0.84      0.84     15999
+weighted avg       0.84      0.84      0.84     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.77      0.83      0.80      1829
+         Cat       0.85      0.79      0.82      2170
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.81      0.81      3999
+weighted avg       0.81      0.81      0.81      3999
+
+Epoch 34 validation accuracy= 0.8075 validation loss= 0.3572
+Epoch [35/50], Step [32/250], Loss: 0.2280, Accuracy:0.84
+Epoch [35/50], Step [64/250], Loss: 0.3217, Accuracy:0.84
+Epoch [35/50], Step [96/250], Loss: 0.3751, Accuracy:0.84
+Epoch [35/50], Step [128/250], Loss: 0.3491, Accuracy:0.84
+Epoch [35/50], Step [160/250], Loss: 0.3314, Accuracy:0.84
+Epoch [35/50], Step [192/250], Loss: 0.2723, Accuracy:0.84
+Epoch [35/50], Step [224/250], Loss: 0.2352, Accuracy:0.84
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.85      0.83      0.84      8008
+         Cat       0.83      0.85      0.84      7991
+
+   micro avg       0.84      0.84      0.84     15999
+   macro avg       0.84      0.84      0.84     15999
+weighted avg       0.84      0.84      0.84     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.80      0.80      0.80      2005
+         Cat       0.80      0.80      0.80      1994
+
+   micro avg       0.80      0.80      0.80      3999
+   macro avg       0.80      0.80      0.80      3999
+weighted avg       0.80      0.80      0.80      3999
+
+Epoch 35 validation accuracy= 0.8015 validation loss= 0.4198
+Epoch [36/50], Step [32/250], Loss: 0.4074, Accuracy:0.83
+Epoch [36/50], Step [64/250], Loss: 0.1982, Accuracy:0.84
+Epoch [36/50], Step [96/250], Loss: 0.3497, Accuracy:0.84
+Epoch [36/50], Step [128/250], Loss: 0.2728, Accuracy:0.84
+Epoch [36/50], Step [160/250], Loss: 0.3617, Accuracy:0.84
+Epoch [36/50], Step [192/250], Loss: 0.3927, Accuracy:0.84
+Epoch [36/50], Step [224/250], Loss: 0.3070, Accuracy:0.84
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.85      0.83      0.84      8008
+         Cat       0.84      0.85      0.84      7991
+
+   micro avg       0.84      0.84      0.84     15999
+   macro avg       0.84      0.84      0.84     15999
+weighted avg       0.84      0.84      0.84     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.77      0.83      0.80      1864
+         Cat       0.84      0.79      0.81      2135
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.81      0.81      3999
+weighted avg       0.81      0.81      0.81      3999
+
+Epoch 36 validation accuracy= 0.8077 validation loss= 0.2940
+Epoch [37/50], Step [32/250], Loss: 0.3544, Accuracy:0.84
+Epoch [37/50], Step [64/250], Loss: 0.3318, Accuracy:0.85
+Epoch [37/50], Step [96/250], Loss: 0.2974, Accuracy:0.84
+Epoch [37/50], Step [128/250], Loss: 0.4140, Accuracy:0.84
+Epoch [37/50], Step [160/250], Loss: 0.5678, Accuracy:0.85
+Epoch [37/50], Step [192/250], Loss: 0.3928, Accuracy:0.85
+Epoch [37/50], Step [224/250], Loss: 0.5030, Accuracy:0.84
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.85      0.83      0.84      8008
+         Cat       0.84      0.85      0.85      7991
+
+   micro avg       0.84      0.84      0.84     15999
+   macro avg       0.84      0.84      0.84     15999
+weighted avg       0.84      0.84      0.84     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.81      0.80      0.81      1998
+         Cat       0.81      0.81      0.81      2001
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.81      0.81      3999
+weighted avg       0.81      0.81      0.81      3999
+
+Epoch 37 validation accuracy= 0.8062 validation loss= 0.2418
+Epoch [38/50], Step [32/250], Loss: 0.3203, Accuracy:0.85
+Epoch [38/50], Step [64/250], Loss: 0.2984, Accuracy:0.84
+Epoch [38/50], Step [96/250], Loss: 0.3909, Accuracy:0.84
+Epoch [38/50], Step [128/250], Loss: 0.3682, Accuracy:0.84
+Epoch [38/50], Step [160/250], Loss: 0.2307, Accuracy:0.84
+Epoch [38/50], Step [192/250], Loss: 0.2570, Accuracy:0.84
+Epoch [38/50], Step [224/250], Loss: 0.2878, Accuracy:0.84
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.85      0.84      0.84      8008
+         Cat       0.84      0.85      0.85      7991
+
+   micro avg       0.84      0.84      0.84     15999
+   macro avg       0.84      0.84      0.84     15999
+weighted avg       0.84      0.84      0.84     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.81      0.81      0.81      2004
+         Cat       0.81      0.81      0.81      1995
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.81      0.81      3999
+weighted avg       0.81      0.81      0.81      3999
+
+Epoch 38 validation accuracy= 0.8117 validation loss= 0.4530
+Epoch [39/50], Step [32/250], Loss: 0.2898, Accuracy:0.85
+Epoch [39/50], Step [64/250], Loss: 0.3296, Accuracy:0.84
+Epoch [39/50], Step [96/250], Loss: 0.3360, Accuracy:0.84
+Epoch [39/50], Step [128/250], Loss: 0.2322, Accuracy:0.85
+Epoch [39/50], Step [160/250], Loss: 0.3051, Accuracy:0.85
+Epoch [39/50], Step [192/250], Loss: 0.2361, Accuracy:0.84
+Epoch [39/50], Step [224/250], Loss: 0.4089, Accuracy:0.85
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.85      0.84      0.84      8008
+         Cat       0.84      0.85      0.85      7991
+
+   micro avg       0.85      0.85      0.85     15999
+   macro avg       0.85      0.85      0.85     15999
+weighted avg       0.85      0.85      0.85     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.78      0.82      0.80      1904
+         Cat       0.83      0.79      0.81      2095
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.81      0.81      3999
+weighted avg       0.81      0.81      0.81      3999
+
+Epoch 39 validation accuracy= 0.8062 validation loss= 0.5125
+Epoch [40/50], Step [32/250], Loss: 0.4030, Accuracy:0.85
+Epoch [40/50], Step [64/250], Loss: 0.3373, Accuracy:0.85
+Epoch [40/50], Step [96/250], Loss: 0.2267, Accuracy:0.85
+Epoch [40/50], Step [128/250], Loss: 0.3852, Accuracy:0.85
+Epoch [40/50], Step [160/250], Loss: 0.2614, Accuracy:0.85
+Epoch [40/50], Step [192/250], Loss: 0.2638, Accuracy:0.85
+Epoch [40/50], Step [224/250], Loss: 0.3560, Accuracy:0.85
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.85      0.84      0.85      8008
+         Cat       0.84      0.85      0.85      7991
+
+   micro avg       0.85      0.85      0.85     15999
+   macro avg       0.85      0.85      0.85     15999
+weighted avg       0.85      0.85      0.85     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.76      0.84      0.80      1807
+         Cat       0.85      0.78      0.82      2192
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.81      0.81      3999
+weighted avg       0.81      0.81      0.81      3999
+
+Epoch 40 validation accuracy= 0.8080 validation loss= 0.3532
+Epoch [41/50], Step [32/250], Loss: 0.3289, Accuracy:0.84
+Epoch [41/50], Step [64/250], Loss: 0.3044, Accuracy:0.85
+Epoch [41/50], Step [96/250], Loss: 0.3747, Accuracy:0.85
+Epoch [41/50], Step [128/250], Loss: 0.4071, Accuracy:0.85
+Epoch [41/50], Step [160/250], Loss: 0.2872, Accuracy:0.85
+Epoch [41/50], Step [192/250], Loss: 0.3883, Accuracy:0.85
+Epoch [41/50], Step [224/250], Loss: 0.3195, Accuracy:0.85
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.86      0.84      0.85      8008
+         Cat       0.85      0.86      0.85      7991
+
+   micro avg       0.85      0.85      0.85     15999
+   macro avg       0.85      0.85      0.85     15999
+weighted avg       0.85      0.85      0.85     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.80      0.82      0.81      1946
+         Cat       0.83      0.81      0.82      2053
+
+   micro avg       0.82      0.82      0.82      3999
+   macro avg       0.82      0.82      0.82      3999
+weighted avg       0.82      0.82      0.82      3999
+
+Epoch 41 validation accuracy= 0.8152 validation loss= 0.6186
+Epoch [42/50], Step [32/250], Loss: 0.4689, Accuracy:0.86
+Epoch [42/50], Step [64/250], Loss: 0.2562, Accuracy:0.85
+Epoch [42/50], Step [96/250], Loss: 0.2641, Accuracy:0.86
+Epoch [42/50], Step [128/250], Loss: 0.3478, Accuracy:0.86
+Epoch [42/50], Step [160/250], Loss: 0.2510, Accuracy:0.86
+Epoch [42/50], Step [192/250], Loss: 0.4309, Accuracy:0.85
+Epoch [42/50], Step [224/250], Loss: 0.3328, Accuracy:0.85
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.86      0.85      0.85      8008
+         Cat       0.85      0.86      0.86      7991
+
+   micro avg       0.86      0.86      0.86     15999
+   macro avg       0.86      0.86      0.86     15999
+weighted avg       0.86      0.86      0.86     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.79      0.83      0.81      1896
+         Cat       0.84      0.80      0.82      2103
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.81      0.81      3999
+weighted avg       0.81      0.81      0.81      3999
+
+Epoch 42 validation accuracy= 0.8117 validation loss= 0.4151
+Epoch [43/50], Step [32/250], Loss: 0.2429, Accuracy:0.85
+Epoch [43/50], Step [64/250], Loss: 0.2732, Accuracy:0.85
+Epoch [43/50], Step [96/250], Loss: 0.3896, Accuracy:0.85
+Epoch [43/50], Step [128/250], Loss: 0.3841, Accuracy:0.85
+Epoch [43/50], Step [160/250], Loss: 0.2807, Accuracy:0.85
+Epoch [43/50], Step [192/250], Loss: 0.3691, Accuracy:0.85
+Epoch [43/50], Step [224/250], Loss: 0.3070, Accuracy:0.85
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.86      0.84      0.85      8008
+         Cat       0.85      0.86      0.85      7991
+
+   micro avg       0.85      0.85      0.85     15999
+   macro avg       0.85      0.85      0.85     15999
+weighted avg       0.85      0.85      0.85     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.80      0.81      0.80      1963
+         Cat       0.81      0.80      0.81      2036
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.81      0.81      3999
+weighted avg       0.81      0.81      0.81      3999
+
+Epoch 43 validation accuracy= 0.8065 validation loss= 0.4816
+Epoch [44/50], Step [32/250], Loss: 0.3453, Accuracy:0.85
+Epoch [44/50], Step [64/250], Loss: 0.2538, Accuracy:0.86
+Epoch [44/50], Step [96/250], Loss: 0.3997, Accuracy:0.86
+Epoch [44/50], Step [128/250], Loss: 0.3933, Accuracy:0.85
+Epoch [44/50], Step [160/250], Loss: 0.4063, Accuracy:0.85
+Epoch [44/50], Step [192/250], Loss: 0.3114, Accuracy:0.85
+Epoch [44/50], Step [224/250], Loss: 0.4290, Accuracy:0.85
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.86      0.85      0.85      8008
+         Cat       0.85      0.86      0.86      7991
+
+   micro avg       0.85      0.85      0.85     15999
+   macro avg       0.85      0.85      0.85     15999
+weighted avg       0.85      0.85      0.85     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.77      0.83      0.80      1860
+         Cat       0.84      0.79      0.81      2139
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.81      0.81      3999
+weighted avg       0.81      0.81      0.81      3999
+
+Epoch 44 validation accuracy= 0.8072 validation loss= 0.2887
+Epoch [45/50], Step [32/250], Loss: 0.3046, Accuracy:0.86
+Epoch [45/50], Step [64/250], Loss: 0.3804, Accuracy:0.85
+Epoch [45/50], Step [96/250], Loss: 0.3881, Accuracy:0.86
+Epoch [45/50], Step [128/250], Loss: 0.4438, Accuracy:0.85
+Epoch [45/50], Step [160/250], Loss: 0.2828, Accuracy:0.85
+Epoch [45/50], Step [192/250], Loss: 0.3645, Accuracy:0.85
+Epoch [45/50], Step [224/250], Loss: 0.3244, Accuracy:0.85
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.86      0.84      0.85      8008
+         Cat       0.84      0.86      0.85      7991
+
+   micro avg       0.85      0.85      0.85     15999
+   macro avg       0.85      0.85      0.85     15999
+weighted avg       0.85      0.85      0.85     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.79      0.82      0.80      1907
+         Cat       0.83      0.80      0.81      2092
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.81      0.81      3999
+weighted avg       0.81      0.81      0.81      3999
+
+Epoch 45 validation accuracy= 0.8095 validation loss= 0.3391
+Epoch [46/50], Step [32/250], Loss: 0.4761, Accuracy:0.86
+Epoch [46/50], Step [64/250], Loss: 0.3159, Accuracy:0.85
+Epoch [46/50], Step [96/250], Loss: 0.2672, Accuracy:0.86
+Epoch [46/50], Step [128/250], Loss: 0.3522, Accuracy:0.86
+Epoch [46/50], Step [160/250], Loss: 0.4442, Accuracy:0.86
+Epoch [46/50], Step [192/250], Loss: 0.3538, Accuracy:0.86
+Epoch [46/50], Step [224/250], Loss: 0.2748, Accuracy:0.85
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.86      0.85      0.85      8008
+         Cat       0.85      0.86      0.85      7991
+
+   micro avg       0.85      0.85      0.85     15999
+   macro avg       0.85      0.85      0.85     15999
+weighted avg       0.85      0.85      0.85     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.78      0.82      0.80      1887
+         Cat       0.83      0.79      0.81      2112
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.81      0.81      3999
+weighted avg       0.81      0.81      0.81      3999
+
+Epoch 46 validation accuracy= 0.8070 validation loss= 0.6047
+Epoch [47/50], Step [32/250], Loss: 0.3313, Accuracy:0.86
+Epoch [47/50], Step [64/250], Loss: 0.4105, Accuracy:0.86
+Epoch [47/50], Step [96/250], Loss: 0.5299, Accuracy:0.86
+Epoch [47/50], Step [128/250], Loss: 0.3319, Accuracy:0.85
+Epoch [47/50], Step [160/250], Loss: 0.3011, Accuracy:0.85
+Epoch [47/50], Step [192/250], Loss: 0.1946, Accuracy:0.85
+Epoch [47/50], Step [224/250], Loss: 0.3514, Accuracy:0.86
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.86      0.85      0.85      8008
+         Cat       0.85      0.86      0.86      7991
+
+   micro avg       0.85      0.85      0.85     15999
+   macro avg       0.85      0.85      0.85     15999
+weighted avg       0.85      0.85      0.85     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.79      0.82      0.80      1898
+         Cat       0.83      0.80      0.82      2101
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.81      0.81      3999
+weighted avg       0.81      0.81      0.81      3999
+
+Epoch 47 validation accuracy= 0.8102 validation loss= 0.3010
+Epoch [48/50], Step [32/250], Loss: 0.4014, Accuracy:0.85
+Epoch [48/50], Step [64/250], Loss: 0.2399, Accuracy:0.85
+Epoch [48/50], Step [96/250], Loss: 0.3978, Accuracy:0.85
+Epoch [48/50], Step [128/250], Loss: 0.2282, Accuracy:0.85
+Epoch [48/50], Step [160/250], Loss: 0.3689, Accuracy:0.85
+Epoch [48/50], Step [192/250], Loss: 0.2628, Accuracy:0.85
+Epoch [48/50], Step [224/250], Loss: 0.4466, Accuracy:0.85
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.86      0.85      0.85      8008
+         Cat       0.85      0.86      0.86      7991
+
+   micro avg       0.86      0.86      0.86     15999
+   macro avg       0.86      0.86      0.86     15999
+weighted avg       0.86      0.86      0.86     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.80      0.82      0.81      1939
+         Cat       0.83      0.81      0.82      2060
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.82      0.81      3999
+weighted avg       0.82      0.81      0.81      3999
+
+Epoch 48 validation accuracy= 0.8150 validation loss= 0.5461
+Epoch [49/50], Step [32/250], Loss: 0.2574, Accuracy:0.87
+Epoch [49/50], Step [64/250], Loss: 0.4066, Accuracy:0.87
+Epoch [49/50], Step [96/250], Loss: 0.3140, Accuracy:0.86
+Epoch [49/50], Step [128/250], Loss: 0.2390, Accuracy:0.86
+Epoch [49/50], Step [160/250], Loss: 0.3627, Accuracy:0.85
+Epoch [49/50], Step [192/250], Loss: 0.3182, Accuracy:0.86
+Epoch [49/50], Step [224/250], Loss: 0.2497, Accuracy:0.86
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.86      0.85      0.85      8008
+         Cat       0.85      0.86      0.86      7991
+
+   micro avg       0.85      0.85      0.85     15999
+   macro avg       0.85      0.85      0.85     15999
+weighted avg       0.85      0.85      0.85     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.79      0.82      0.80      1910
+         Cat       0.83      0.80      0.81      2089
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.81      0.81      3999
+weighted avg       0.81      0.81      0.81      3999
+
+Epoch 49 validation accuracy= 0.8077 validation loss= 0.4104
+Epoch [50/50], Step [32/250], Loss: 0.3755, Accuracy:0.86
+Epoch [50/50], Step [64/250], Loss: 0.3390, Accuracy:0.85
+Epoch [50/50], Step [96/250], Loss: 0.4402, Accuracy:0.85
+Epoch [50/50], Step [128/250], Loss: 0.5435, Accuracy:0.85
+Epoch [50/50], Step [160/250], Loss: 0.3094, Accuracy:0.85
+Epoch [50/50], Step [192/250], Loss: 0.3257, Accuracy:0.85
+Epoch [50/50], Step [224/250], Loss: 0.2536, Accuracy:0.86
+TrainingScore:
+              precision    recall  f1-score   support
+
+         Dog       0.86      0.85      0.85      8008
+         Cat       0.85      0.87      0.86      7991
+
+   micro avg       0.86      0.86      0.86     15999
+   macro avg       0.86      0.86      0.86     15999
+weighted avg       0.86      0.86      0.86     15999
+
+ValidationScore:
+              precision    recall  f1-score   support
+
+         Dog       0.80      0.82      0.81      1935
+         Cat       0.83      0.81      0.82      2064
+
+   micro avg       0.81      0.81      0.81      3999
+   macro avg       0.81      0.81      0.81      3999
+weighted avg       0.81      0.81      0.81      3999
+
+Epoch 50 validation accuracy= 0.8145 validation loss= 0.4614
