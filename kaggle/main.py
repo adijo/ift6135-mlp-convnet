@@ -3,7 +3,6 @@ Based on the following tutorial from the web:
 https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/02-intermediate/convolutional_neural_network/main.py#L35-L56
 """
 
-import os
 import time
 import datetime
 
@@ -11,26 +10,23 @@ import torch
 import torch.nn as nn
 from torch.optim.lr_scheduler import MultiStepLR
 
-import neuralnets as neuralnets
-import utils as utils
+import kaggle.neuralnets as neuralnets
+import kaggle.utils as utils
 
-#We can start from a pre-trained baseline.
-
-
-
-#save_each_epoch = False
-save_each_epoch= True
-start_file = None
-
-#start_file = "2019-02-03-19_59_44_epoch49"
 
 def main():
-    # Device configuration
+    """
+    Before running this, place all the .jpg images of the training set directly into kaggle/data/trainset.
+    This code will load in the trainset, split it into a train and validation set and start training.
+    """
+    # Settings
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+    save_each_epoch = True
+    start_file = None
 
     print("Using device:", device)
     # Hyper parameters
-    num_epochs = 50 #For test before commit
+    num_epochs = 50
     num_classes = 2
     batch_size_train = 64
     batch_size_eval = 64
@@ -44,7 +40,7 @@ def main():
 
     model = neuralnets.KaggleNetSimple(num_classes).to(device)
 
-    #Allows restarting from a save model. Just change the start_file path before launching.
+    # Allows restarting from a save model. Just change the start_file path before launching.
     if start_file:
         model.load_state_dict(torch.load(start_file))
 
@@ -63,7 +59,6 @@ def main():
     print("Learning rate:", learning_rate, file=logfile)
     logfile.flush()
 
-    #Not sure if we're allowed to use the scheduler. 
     scheduler = MultiStepLR(optimizer, milestones=[20, 40], gamma=0.1)
 
     print("Training...")
@@ -71,7 +66,7 @@ def main():
     best_validation_accuracy = 0.0
     best_model_path = "best_model.bak"
     for epoch in range(num_epochs):
-        train(model, device, total_step, scheduler, train_loader, validation_loader, criterion, optimizer, batch_size_train, logfile, epoch, num_epochs)
+        train(model, device, total_step, scheduler, train_loader, criterion, optimizer, batch_size_train, logfile, epoch, num_epochs)
         validation_accuracy = validate(model, validation_loader, device, logfile)
 
         print("Epoch {} validation accuracy= {:.4f}".format(epoch + 1, validation_accuracy))
@@ -92,15 +87,8 @@ def main():
     del model
     torch.cuda.empty_cache()
 
-    #best_model = neuralnets.KaggleNet(num_classes).to(device)
-    #best_model.load_state_dict(torch.load(best_model_path))
 
-    # Please use "predict.py" for predictions. 
-
-    #predict_test_set_labels(best_model, test_loader, device)
-
-
-def train(model, device, total_step, scheduler, train_loader, validation_loader, criterion, optimizer, batch_size, logfile, epoch, num_epochs):
+def train(model, device, total_step, scheduler, train_loader, criterion, optimizer, batch_size, logfile, epoch, num_epochs):
     # Reset metrics for each epoch
     scheduler.step()
     full_train_predicted = []
@@ -158,33 +146,6 @@ def validate(model, validation_loader, device, logfile):
         utils.print_score("Validation", full_validation_predicted, full_validation_labels, logfile)
 
     return validation_correct / validation_total
-
-# This code is replaced py predict.py.
-# It should be called manually on a saved model.
-
-# def predict_test_set_labels(model, test_loader, device):
-#     # Test the model. Set it into evaluation mode.
-#     model.eval()
-# 
-#     print("Predicting test set labels...")
-#     predictions = []
-#     with torch.no_grad():
-#         for images, labels in test_loader:
-#             images = images.to(device, dtype=torch.float)
-#             outputs = model(images)
-#             _, predicted = torch.max(outputs.data, 1)
-#             predicted = predicted.cpu().numpy().tolist()
-#             predictions += predicted
-# 
-#     target_names = ["Dog", "Cat"]
-# 
-#     predictions_file_prefix = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H_%M_%S')
-#     predictions_file_path = os.path.join("predictions", predictions_file_prefix+".csv")
-#     print("Saving predictions to {}".format(predictions_file_path))
-#     with open(predictions_file_path, "w+") as predictions_file:
-#         predictions_file.write("id,label\n")
-#         for i in range(len(predictions)):
-#             predictions_file.write("{},{}\n".format(str(i+1), target_names[predictions[i]]))
 
 
 if __name__ == '__main__':

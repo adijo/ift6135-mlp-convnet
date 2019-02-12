@@ -1,31 +1,29 @@
-#This one will just load an existing saved model and make predictions
-
 import os
 import time
 import datetime
 
-import torch 
-import torch.nn as nn
+import torch
 
-import neuralnets as neuralnets
-import utils as utils
+import kaggle.neuralnets as neuralnets
+import kaggle.utils as utils
 
-start_file = "best_feb3.pt"
-num_classes = 2
 
 def main():
-    # Device configuration
+    """
+    Before running this, place all the .jpg images of the test set directly into kaggle/data/testset.
+    This code will load an existing saved model referenced by the variable start_file and make predictions
+    """
+    # Configuration
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+    start_file = "best_feb3.pt"
+    num_classes = 2
+
     print("Using device:", device)
     print("Indexing test examples...")
     test_loader = utils.get_kaggle_test_loader()
     best_model = neuralnets.KaggleNetSimple(num_classes).to(device)
     best_model.load_state_dict(torch.load(start_file))
     predict_test_set_labels(best_model, test_loader, device)
-
-
-#WARNING: Code duplication here. We should factorize!!!
-#This could be moved to the "utils.py" file or somewhere else.
 
 
 def predict_test_set_labels(model, test_loader, device):
@@ -41,7 +39,7 @@ def predict_test_set_labels(model, test_loader, device):
             _, predicted = torch.max(outputs.data, 1)
             predicted = predicted.cpu().numpy().tolist()
             predictions += predicted
-            all_image_names  += image_names
+            all_image_names += image_names
 
     target_names = ["Dog", "Cat"]
 
@@ -51,7 +49,7 @@ def predict_test_set_labels(model, test_loader, device):
     with open(predictions_file_path, "w+") as predictions_file:
         predictions_file.write("id,label\n")
         for i in range(len(predictions)):
-            predictions_file.write("{},{}\n".format(all_image_names[i].replace(".jpg",""), target_names[predictions[i]]))
+            predictions_file.write("{},{}\n".format(all_image_names[i].replace(".jpg", ""), target_names[predictions[i]]))
 
 
 if __name__ == '__main__':
