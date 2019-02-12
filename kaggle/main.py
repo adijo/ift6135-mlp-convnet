@@ -21,7 +21,7 @@ def main():
     """
     # Settings
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-    save_each_epoch = True
+    save_each_epoch = False
     start_file = None
 
     print("Using device:", device)
@@ -81,7 +81,7 @@ def main():
             torch.save(model.state_dict(),logfile_prefix+"_epoch"+str(epoch))
 
     print("Training complete.")
-    print("The model that scored the highest validation accuracy {}% was preserved and will be used for predictions.".format(best_validation_accuracy*100))
+    print("The model that scored the highest validation accuracy {}% was saved as {} and will be used for predictions.".format(best_validation_accuracy*100, best_model_path))
 
     # Clearing training model from memory
     del model

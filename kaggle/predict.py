@@ -15,14 +15,15 @@ def main():
     """
     # Configuration
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-    start_file = "best_feb3.pt"
+    model_to_use = "best_model.bak"
     num_classes = 2
 
     print("Using device:", device)
     print("Indexing test examples...")
     test_loader = utils.get_kaggle_test_loader()
     best_model = neuralnets.KaggleNetSimple(num_classes).to(device)
-    best_model.load_state_dict(torch.load(start_file))
+    best_model.load_state_dict(torch.load(model_to_use))
+    print("Using the model {} for predictions".format(model_to_use))
     predict_test_set_labels(best_model, test_loader, device)
 
 
