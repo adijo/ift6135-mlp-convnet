@@ -9,12 +9,14 @@ import datetime
 
 import torch 
 import torch.nn as nn
-#from torch.optim.lr_scheduler import MultiStepLR
+from torch.optim.lr_scheduler import MultiStepLR
 
 import neuralnets as neuralnets
 import utils as utils
 
 #We can start from a pre-trained baseline.
+
+
 
 #save_each_epoch = False
 save_each_epoch= True
@@ -28,11 +30,11 @@ def main():
 
     print("Using device:", device)
     # Hyper parameters
-    num_epochs = 100 #For test before commit
+    num_epochs = 50 #For test before commit
     num_classes = 2
     batch_size_train = 64
     batch_size_eval = 64
-    learning_rate = 0.01
+    learning_rate = 0.1
 
     print("Indexing training and test examples...")
     train_loader, validation_loader, test_loader = utils.get_kaggle_data_loaders(
@@ -62,18 +64,18 @@ def main():
     logfile.flush()
 
     #Not sure if we're allowed to use the scheduler. 
-    #scheduler = MultiStepLR(optimizer, milestones=[20, 40], gamma=0.1)
+    scheduler = MultiStepLR(optimizer, milestones=[20, 40], gamma=0.1)
 
     print("Training...")
     total_step = len(train_loader)
     best_validation_accuracy = 0.0
     best_model_path = "best_model.bak"
     for epoch in range(num_epochs):
-        train(model, device, total_step, train_loader, validation_loader, criterion, optimizer, batch_size_train, logfile, epoch, num_epochs)
-        validation_accuracy, validation_loss = validate(model, validation_loader, device, logfile, criterion)
+        train(model, device, total_step, scheduler, train_loader, validation_loader, criterion, optimizer, batch_size_train, logfile, epoch, num_epochs)
+        validation_accuracy = validate(model, validation_loader, device, logfile)
 
-        print("Epoch {} validation accuracy= {:.4f} validation loss= {:.4f}".format(epoch + 1, validation_accuracy, validation_loss))
-        print("Epoch {} validation accuracy= {:.4f} validation loss= {:.4f}".format(epoch + 1, validation_accuracy, validation_loss), file=logfile)
+        print("Epoch {} validation accuracy= {:.4f}".format(epoch + 1, validation_accuracy))
+        print("Epoch {} validation accuracy= {:.4f}".format(epoch + 1, validation_accuracy), file=logfile)
 
         # We preserve the best performing model. Early stopping ideology
         if validation_accuracy > best_validation_accuracy:
@@ -98,8 +100,9 @@ def main():
     #predict_test_set_labels(best_model, test_loader, device)
 
 
-def train(model, device, total_step,  train_loader, validation_loader, criterion, optimizer, batch_size, logfile, epoch, num_epochs):
+def train(model, device, total_step, scheduler, train_loader, validation_loader, criterion, optimizer, batch_size, logfile, epoch, num_epochs):
     # Reset metrics for each epoch
+    scheduler.step()
     full_train_predicted = []
     full_train_labels = []
 
@@ -146,7 +149,6 @@ def validate(model, validation_loader, device, logfile, criterion):
             validation_labels = labels.to(device, dtype=torch.long)
 
             validation_outputs = model(validation_images)
-            validation_loss = criterion(validation_outputs, validation_labels)
             _, validation_predicted = torch.max(validation_outputs.data, 1)
             validation_total += validation_labels.size(0)
             validation_correct += (validation_predicted == validation_labels).sum().item()
@@ -155,7 +157,7 @@ def validate(model, validation_loader, device, logfile, criterion):
 
         utils.print_score("Validation", full_validation_predicted, full_validation_labels, logfile)
 
-    return (validation_correct / validation_total, validation_loss.item())
+    return validation_correct / validation_total
 
 # This code is replaced py predict.py.
 # It should be called manually on a saved model.
