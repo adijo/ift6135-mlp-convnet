@@ -10,7 +10,9 @@ import torch.nn as nn
 import neuralnets as neuralnets
 import utils as utils
 
-start_file = "best_feb3.pt"
+import numpy as np
+
+start_file = "2019-02-11_lr_0.001.pt"
 num_classes = 2
 
 def main():
@@ -34,19 +36,30 @@ def predict_test_set_labels(model, test_loader, device):
     print("Predicting test set labels...")
     predictions = []
     all_image_names = []
+    all_outputs = None
     with torch.no_grad():
         for images, labels, image_names in test_loader:
             images = images.to(device, dtype=torch.float)
             outputs = model(images)
+            if all_outputs is None:
+                all_outputs = outputs.data.cpu().numpy()
+            else:
+                all_outputs = np.concatenate((all_outputs, outputs.data.cpu().numpy()),axis=0)           
             _, predicted = torch.max(outputs.data, 1)
             predicted = predicted.cpu().numpy().tolist()
             predictions += predicted
             all_image_names  += image_names
 
+    
+    
     target_names = ["Dog", "Cat"]
 
     predictions_file_prefix = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H_%M_%S')
     predictions_file_path = os.path.join("predictions", predictions_file_prefix+".csv")
+    all_outputs = np.column_stack([all_image_names, all_outputs])
+    detail_prediction_file_path = os.path.join("predictions", predictions_file_prefix + "_details.csv")
+    np.savetxt(detail_prediction_file_path, all_outputs, delimiter="\t", fmt="%s")
+
     print("Saving predictions to {}".format(predictions_file_path))
     with open(predictions_file_path, "w+") as predictions_file:
         predictions_file.write("id,label\n")
