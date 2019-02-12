@@ -25,7 +25,7 @@ class KaggleNetVgg(nn.Module):
         self.fc = nn.Sequential(
             nn.Linear(512 * 2 * 2, 4096), nn.ReLU(),
             nn.Linear(4096, 4096), nn.ReLU(),
-            nn.Linear(4095, num_class)
+            nn.Linear(4096, num_class)
         )
 
     def forward(self, x):
