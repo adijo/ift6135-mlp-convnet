@@ -38,7 +38,7 @@ def main():
         batch_size_eval=batch_size_eval
     )
 
-    model = neuralnets.KaggleNetSimple(num_classes).to(device)
+    model = neuralnets.KaggleNetVgg(num_classes).to(device)
 
     # Allows restarting from a save model. Just change the start_file path before launching.
     if start_file:
@@ -99,7 +99,6 @@ def train(model, device, total_step, scheduler, train_loader, criterion, optimiz
     for i, (images, labels, image_files) in enumerate(train_loader):
         images = images.to(device, dtype=torch.float)
         labels = labels.to(device, dtype=torch.long)
-
         # Forward pass
         outputs = model(images)
         loss = criterion(outputs, labels)
