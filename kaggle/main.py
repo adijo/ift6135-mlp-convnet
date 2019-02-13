@@ -137,7 +137,7 @@ def train(model, device, total_step, scheduler, train_loader, validation_loader,
     utils.print_score("Training", full_train_labels, full_train_predicted, logfile)
 
 
-def validate(model, validation_loader, device, logfile, criterion):
+def validate(model, validation_loader, device, logfile):
     full_validation_predicted = []
     full_validation_labels = []
 
