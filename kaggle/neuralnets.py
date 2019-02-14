@@ -22,7 +22,10 @@ class KaggleNetSimple(nn.Module):
         self.layer6 = nn.Sequential(
             nn.Conv2d(192, 192, kernel_size=3, stride=2, padding=0),
             nn.ReLU())
-        self.fc = nn.Linear(12 * 12 * 192, num_classes)
+        self.fc = nn.Sequential(
+            nn.Linear(12 * 12 * 192, 1),
+            nn.Sigmoid()
+        )
 
     def forward(self, x):
         out = self.layer1(x)
