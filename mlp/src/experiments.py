@@ -5,6 +5,7 @@ from literals.activations import ActivationLiterals
 from literals.initialization import InitLiterals
 from multi_layered_perceptron import MultiLayeredPerceptron
 import numpy as np
+import os
 
 
 def calculate_accuracy(predictions, true):
@@ -16,8 +17,8 @@ def calculate_accuracy(predictions, true):
 
 
 def run_experiment(hyper_parameters):
-    experiment = Experiment(api_key="M7fmnPjjt1sUXWmFEAAnnsm8N",
-                            project_name="multilayeredperceptron", workspace="adijo")
+    experiment = Experiment(api_key=os.environ["COMET_API_KEY"],
+                            project_name=os.environ["COMET_PROJECT_NAME"], workspace=os.environ["COMET_WORKSPACE"])
     mnist = MNISTDataset(hyper_parameters["batch_size"])
     mnist_valid = MNISTTestDataset(100)
     mlp = MultiLayeredPerceptron(hyper_parameters["layers"])
