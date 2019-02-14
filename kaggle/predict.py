@@ -12,7 +12,7 @@ import utils as utils
 
 import numpy as np
 
-start_file = "2019-02-11_lr_0.001.pt"
+start_file = "best_feb13.pt"
 num_classes = 2
 
 def main():
@@ -45,8 +45,8 @@ def predict_test_set_labels(model, test_loader, device):
                 all_outputs = outputs.data.cpu().numpy()
             else:
                 all_outputs = np.concatenate((all_outputs, outputs.data.cpu().numpy()),axis=0)           
-            _, predicted = torch.max(outputs.data, 1)
-            predicted = predicted.cpu().numpy().tolist()
+            predicted = torch.round(outputs.data) #Class 0 if <0.5, Class 1 otherwise.
+            predicted = predicted.flatten().cpu().numpy().astype(int).tolist()
             predictions += predicted
             all_image_names  += image_names
 
