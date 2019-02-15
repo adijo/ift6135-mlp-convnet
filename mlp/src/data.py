@@ -48,30 +48,6 @@ class MNISTDataset(AbstractDataset):
         X_test = X_test.astype(np.float32) / 255.0
         super().__init__(X_train, one_hot(y_train, len(set(y_train))), batch_size)
 
-# class MNISTTestDataset(AbstractDataset):
-#     def __init__(self, batch_size):
-#         with gzip.open('/Users/adityajoshi/Downloads/mnist.pkl.gz', 'rb') as mnist_gzip:
-#             mnist_pickled = pickle._Unpickler(mnist_gzip)
-#             mnist_pickled.encoding = 'latin1'
-#             train_split, validation_split, test_split = mnist_pickled.load()
-#
-#         X_valid = validation_split[0].astype(np.float32) / 255.0
-#         y_valid = validation_split[1].astype(np.float32)
-#         super().__init__(X_valid, one_hot(y_valid, len(set(y_valid))), batch_size)
-
-
-# class MNISTDataset(AbstractDataset):
-#     def __init__(self, batch_size):
-#         with gzip.open('/Users/adityajoshi/Downloads/mnist.pkl.gz', 'rb') as mnist_gzip:
-#             mnist_pickled = pickle._Unpickler(mnist_gzip)
-#             mnist_pickled.encoding = 'latin1'
-#             train_split, validation_split, test_split = mnist_pickled.load()
-#         X_train = train_split[0] / 255.0
-#
-#         y_train = train_split[1]
-#         print("SHAPE", X_train[0], one_hot(y_train, len(set(y_train)))[0])
-#         super().__init__(X_train, one_hot(y_train, len(set(y_train))), batch_size)
-#
 
 class MNISTTestDataset(AbstractDataset):
     def __init__(self, batch_size):
