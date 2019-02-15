@@ -35,7 +35,7 @@ class MultiLayeredPerceptron(object):
 
     def gradient_check(self, X, y, epsilon):
         """
-        It's not neat right now. 
+        It's not neat right now.
         """
         X = X.T
         y = y.T
@@ -72,10 +72,9 @@ class MultiLayeredPerceptron(object):
             X_2_minus = second_layer.forward(X_1)
             out_minus = output_layer.forward(X_2_minus)
             loss_minus = output_layer.average_loss(out_minus, y)
-            second_layer_weights[0][i] += epsilon
+            second_layer_weights[0][i] += epsilon  # reset
 
             second_layer_grad_check.append((loss_plus - loss_minus) / (2 * epsilon))
-            second_layer_weights[0][i] += epsilon  # reset
         return np.max(np.abs(np.array(second_layer_grad_check) - second_layer_true_grad_weight))
 
     def train(self, train_dataset, valid_dataset, epochs, learning_rate=0.0001, experiment=None):

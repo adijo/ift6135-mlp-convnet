@@ -20,15 +20,22 @@ def run_experiment():
     mlp.train(mnist_full, mnist_valid, 5)
     X, y = mnist.get_next_batch()
 
-    N_values = [1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 100, 200, 300, 400, 500, 1000, 2000, 3000, 5000, 10000]
+    N_values = [1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 100, 200, 300, 400, 500, 1000]
     max_diffs = []
     for n in N_values:
         max_diffs.append(mlp.gradient_check(X, y, epsilon=1.0/n))
+
+    plt.xlabel("N")
+    plt.ylabel("Max Difference: True Gradient - Finite Gradient")
+    plt.title("Finite Gradient Check")
+    plt.semilogx(N_values, max_diffs, color="#85144b", alpha=0.6)
+    plt.show()
 
     plt.xlabel("Epsilon")
     plt.ylabel("Max Difference: True Gradient - Finite Gradient")
     plt.title("Finite Gradient Check")
     plt.plot(list(map(lambda x: 1.0/x, N_values)), max_diffs, color="#85144b", alpha=0.6)
     plt.show()
+
 
 run_experiment()
