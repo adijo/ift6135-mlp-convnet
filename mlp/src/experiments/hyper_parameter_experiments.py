@@ -8,7 +8,6 @@ import numpy as np
 import os
 
 
-
 def calculate_accuracy(predictions, true):
     correct = 0
     for i in range(len(predictions)):
@@ -18,18 +17,21 @@ def calculate_accuracy(predictions, true):
 
 
 def run_experiment(hyper_parameters):
-    experiment = Experiment(api_key=os.environ["comet_api_key"],
-                            project_name=os.environ["comet_project_name"], workspace=os.environ["comet_workspace"])
+    experiment = Experiment(api_key=os.environ["COMET_API_KEY"],
+                            project_name=os.environ["COMET_PROJECT_NAME"], workspace=os.environ["COMET_WORKSPACE"])
     mnist = MNISTDataset(hyper_parameters["batch_size"])
+    mnist_valid = MNISTTestDataset(100)
     mlp = MultiLayeredPerceptron(hyper_parameters["layers"])
-    final_loss = mlp.train(mnist, epochs=hyper_parameters["epochs"])
+    final_loss = mlp.train(mnist, mnist_valid, epochs=hyper_parameters["epochs"], experiment=experiment)
 
     X_train, y_train = mnist.get_all_data()
+    print(X_train.shape)
+    print()
     y_train_pred = mlp.predict(X_train)
     train_accuracy = calculate_accuracy(y_train_pred, np.argmax(y_train, axis=1))
 
-    mnist_test = MNISTTestDataset(100)
-    X_test, y_test = mnist_test.get_all_data()
+    mnist_valid = MNISTTestDataset(100)
+    X_test, y_test = mnist_valid.get_all_data()
 
     y_test_pred = mlp.predict(X_test)
     test_accuracy = calculate_accuracy(y_test_pred, np.argmax(y_test, axis=1))
@@ -59,14 +61,14 @@ def find_total_parameters(layers):
 
 
 hyper_parameters = {
-    "learning_rate": 0.00001,
-    "epochs": 50,
-    "batch_size": 10000,
+    "learning_rate": 0.1,
+    "epochs": 300,
+    "batch_size": 100,
     "dataset": "mnist",
     "layers": [
-        HiddenLayer(784, 700, activation_name=ActivationLiterals.RELU, initialization_name=InitLiterals.GLOROT),
-        HiddenLayer(700, 700, activation_name=ActivationLiterals.RELU, initialization_name=InitLiterals.GLOROT),
-        FinalLayer(700, 10, activation_name=ActivationLiterals.SOFTMAX, initialization_name=InitLiterals.GLOROT)
+        HiddenLayer(784, 32, activation_name=ActivationLiterals.RELU, initialization_name=InitLiterals.GLOROT),
+        HiddenLayer(32, 32, activation_name=ActivationLiterals.RELU, initialization_name=InitLiterals.GLOROT),
+        FinalLayer(32, 10, activation_name=ActivationLiterals.SOFTMAX, initialization_name=InitLiterals.GLOROT)
     ]
 }
 

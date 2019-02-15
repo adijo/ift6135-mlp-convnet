@@ -100,7 +100,7 @@ class HiddenLayer(AbstractLayer):
         assert(next_layer_weights.shape[1] == self.out_dim)
         assert(next_layer_delta.shape[1] == batch_size)
         self.delta = np.matmul(next_layer_weights.T, next_layer_delta) * \
-                     self.activation_fn.calculate_gradient(self.pre_activation, None)
+            self.activation_fn.calculate_gradient(self.pre_activation, None)
         assert(self.delta.shape == (self.out_dim, batch_size))
         return self.delta
 
@@ -109,12 +109,19 @@ class FinalLayer(AbstractLayer):
     def __init__(self, in_dim, out_dim, activation_name, initialization_name):
         super().__init__(in_dim, out_dim, activation_name, initialization_name)
 
-    def loss(self, predictions, target):
+    def average_loss(self, predictions, target):
         delta = 1e-9
         # Predictions is of size (num_classes, batch_size)
         # Target is of size (num_classes, batch_size)
         batch_size = predictions.shape[1]
         loss = np.sum(-(target * np.log(predictions + delta))) / batch_size
+        return loss
+
+    def loss(self, predictions, target):
+        delta = 1e-9
+        # Predictions is of size (num_classes, batch_size)
+        # Target is of size (num_classes, batch_size)
+        loss = np.sum(-(target * np.log(predictions + delta)))
         return loss
 
     def backward(self, predictions, target):

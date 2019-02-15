@@ -63,7 +63,8 @@ class TestActivation(unittest.TestCase):
 
         # Then
         sum_of_columns = 4.0
-        self.assertTrue(np.isclose(sum_of_columns, np.sum(np.sum(activation, axis=0), 1e-3)))
+
+        self.assertTrue(np.isclose(sum_of_columns, np.sum(np.sum(activation, axis=0)), 1e-3))
 
     def test_softmax_calculate_gradient(self):
         # Given
