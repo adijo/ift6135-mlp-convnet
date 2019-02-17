@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import numpy as np
-from literals.initialization import InitLiterals
+from mlp.src.literals.initialization import InitLiterals
 
 
 class AbstractInitialization(ABC):

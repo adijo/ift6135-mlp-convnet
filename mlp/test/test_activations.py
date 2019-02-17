@@ -1,5 +1,5 @@
-from activations import Activation, ReLU, Softmax
-from literals.activations import ActivationLiterals
+from mlp.src.activations import Activation, ReLU, Softmax
+from mlp.src.literals.activations import ActivationLiterals
 import unittest
 import numpy as np
 from nose.tools import raises

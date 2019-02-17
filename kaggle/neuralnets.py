@@ -3,7 +3,7 @@ import torch.nn as nn
 
 class KaggleNetSimple2(nn.Module):
     def __init__(self, num_classes=2):
-        super(KaggleNetSimple, self).__init__()
+        super(KaggleNetSimple2, self).__init__()
         self.layer1 = nn.Sequential(
             nn.Conv2d(3, 96, kernel_size=3, stride=1, padding=0),
             nn.ReLU())

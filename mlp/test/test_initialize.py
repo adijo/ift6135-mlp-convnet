@@ -1,7 +1,7 @@
 import unittest
-from initialize import initialize_weights
+from mlp.src.initialize import initialize_weights
 import numpy as np
-from literals.initialization import InitLiterals
+from mlp.src.literals.initialization import InitLiterals
 
 
 class TestInitialize(unittest.TestCase):

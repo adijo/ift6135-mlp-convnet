@@ -1,4 +1,4 @@
-from validate import validate_mlp_architecture
+from mlp.src.validate import validate_mlp_architecture
 import numpy as np
 
 
@@ -78,9 +78,15 @@ class MultiLayeredPerceptron(object):
         return np.max(np.abs(np.array(second_layer_grad_check) - second_layer_true_grad_weight))
 
     def train(self, train_dataset, valid_dataset, epochs, learning_rate=0.0001, experiment=None):
+        print("============")
+        print("Training ...")
+        print("============")
+
         loss = []
         average_loss = []
+        validation_accuracy = []
         for epoch in range(epochs):
+            print("-> Epoch: {}/{}".format(epoch+1, epochs))
             tot_loss = 0
             while train_dataset.has_next_batch():
                 X_batch, y_batch = train_dataset.get_next_batch()
@@ -89,21 +95,27 @@ class MultiLayeredPerceptron(object):
                 self.fprop(X_batch)
                 tot_loss += self.bprop(y_batch, loss, learning_rate)
             average_loss.append(tot_loss / train_dataset.get_input_size())
-            print("Loss", loss[-1])
+            print("Loss: ", loss[-1])
             X_train, y_train = train_dataset.get_all_data()
             X_valid, y_valid = valid_dataset.get_all_data()
             train_predictions = self.predict(X_train)
             train_accuracy = self.calculate_accuracy(train_predictions, np.argmax(y_train, axis=1))
             valid_predictions = self.predict(X_valid)
             valid_accuracy = self.calculate_accuracy(valid_predictions, np.argmax(y_valid, axis=1))
+            validation_accuracy.append(valid_accuracy)
             if valid_accuracy > 0.975:
                 break
             if experiment:
                 experiment.log_metric("train_loss", loss[-1], step=(epoch + 1))
                 experiment.log_metric("valid_accuracy", valid_accuracy, step=(epoch + 1))
                 experiment.log_metric("train_accuracy", train_accuracy, step=(epoch + 1))
+            else:
+                print("train_loss: {}".format(loss[-1], epoch + 1))
+                print("valid_accuracy: {}".format(valid_accuracy, epoch + 1))
+                print("train_accuracy: {}".format(train_accuracy, epoch + 1))
             train_dataset.reset()
-        return average_loss
+
+        return average_loss, validation_accuracy
 
     def calculate_accuracy(self, predictions, true):
         correct = 0

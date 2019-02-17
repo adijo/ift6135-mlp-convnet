@@ -1,33 +1,30 @@
-#This one will just load an existing saved model and make predictions
+# This one will just load an existing saved model and make predictions
 
 import os
 import time
 import datetime
 
-import torch 
-import torch.nn as nn
+import torch
 
-import neuralnets as neuralnets
-import utils as utils
+import kaggle.neuralnets as neuralnets
+import kaggle.utils as utils
 
 import numpy as np
 
-start_file = "best_feb13.pt"
+start_file = "best_model.bak"
 num_classes = 2
+
 
 def main():
     # Device configuration
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     print("Using device:", device)
+    print("Using the mode {} for predictions".format(start_file))
     print("Indexing test examples...")
     test_loader = utils.get_kaggle_test_loader()
-    best_model = neuralnets.KaggleNetSimple(num_classes).to(device)
+    best_model = neuralnets.KaggleNetSimple2(num_classes).to(device)
     best_model.load_state_dict(torch.load(start_file))
     predict_test_set_labels(best_model, test_loader, device)
-
-
-#WARNING: Code duplication here. We should factorize!!!
-#This could be moved to the "utils.py" file or somewhere else.
 
 
 def predict_test_set_labels(model, test_loader, device):
@@ -45,13 +42,10 @@ def predict_test_set_labels(model, test_loader, device):
                 all_outputs = outputs.data.cpu().numpy()
             else:
                 all_outputs = np.concatenate((all_outputs, outputs.data.cpu().numpy()),axis=0)           
-            predicted = torch.round(outputs.data) #Class 0 if <0.5, Class 1 otherwise.
+            predicted = torch.round(outputs.data) # Class 0 if <0.5, Class 1 otherwise.
             predicted = predicted.flatten().cpu().numpy().astype(int).tolist()
             predictions += predicted
-            all_image_names  += image_names
-
-    
-    
+            all_image_names += image_names
     target_names = ["Dog", "Cat"]
 
     predictions_file_prefix = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H_%M_%S')
@@ -64,7 +58,7 @@ def predict_test_set_labels(model, test_loader, device):
     with open(predictions_file_path, "w+") as predictions_file:
         predictions_file.write("id,label\n")
         for i in range(len(predictions)):
-            predictions_file.write("{},{}\n".format(all_image_names[i].replace(".jpg",""), target_names[predictions[i]]))
+            predictions_file.write("{},{}\n".format(all_image_names[i].replace(".jpg", ""), target_names[predictions[i]]))
 
 
 if __name__ == '__main__':

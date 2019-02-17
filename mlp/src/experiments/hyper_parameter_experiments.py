@@ -1,9 +1,8 @@
-from comet_ml import Experiment
-from data import MNISTDataset, MNISTTestDataset
-from layers import HiddenLayer, FinalLayer
-from literals.activations import ActivationLiterals
-from literals.initialization import InitLiterals
-from multi_layered_perceptron import MultiLayeredPerceptron
+from mlp.src.data import MNISTDataset, MNISTTestDataset
+from mlp.src.layers import HiddenLayer, FinalLayer
+from mlp.src.literals.activations import ActivationLiterals
+from mlp.src.literals.initialization import InitLiterals
+from mlp.src.multi_layered_perceptron import MultiLayeredPerceptron
 import numpy as np
 import os
 
@@ -17,8 +16,13 @@ def calculate_accuracy(predictions, true):
 
 
 def run_experiment(hyper_parameters):
-    experiment = Experiment(api_key=os.environ["COMET_API_KEY"],
-                            project_name=os.environ["COMET_PROJECT_NAME"], workspace=os.environ["COMET_WORKSPACE"])
+    experiment = None
+    use_comet = False
+    if use_comet:
+        import comet_ml.Experiment
+        experiment = comet_ml.Experiment(api_key=os.environ["COMET_API_KEY"],
+                                         project_name=os.environ["COMET_PROJECT_NAME"],
+                                         workspace=os.environ["COMET_WORKSPACE"])
     mnist = MNISTDataset(hyper_parameters["batch_size"])
     mnist_valid = MNISTTestDataset(100)
     mlp = MultiLayeredPerceptron(hyper_parameters["layers"])
@@ -39,16 +43,33 @@ def run_experiment(hyper_parameters):
     for param, value in hyper_parameters.items():
         if param == "layers":
             for i, layer in enumerate(value):
-                experiment.log_parameter("layer_{}_num_hidden_units".format(str(i + 1)), layer.get_num_neurons())
-                experiment.log_parameter("layer_{}_activation".format(str(i + 1)), layer.get_activation_type())
-                experiment.log_parameter("layer_{}_init".format(str(i + 1)), layer.get_init_type())
+                if experiment:
+                    experiment.log_parameter("layer_{}_num_hidden_units".format(str(i + 1)), layer.get_num_neurons())
+                    experiment.log_parameter("layer_{}_activation".format(str(i + 1)), layer.get_activation_type())
+                    experiment.log_parameter("layer_{}_init".format(str(i + 1)), layer.get_init_type())
+                else:
+                    print("layer_{}_num_hidden_units".format(str(i + 1)), layer.get_num_neurons())
+                    print("layer_{}_activation".format(str(i + 1)), layer.get_activation_type())
+                    print("layer_{}_init".format(str(i + 1)), layer.get_init_type())
         else:
-            experiment.log_parameter(param, value)
-    experiment.log_parameter("total_parameters", find_total_parameters(hyper_parameters["layers"]))
+            if experiment:
+                experiment.log_parameter(param, value)
+            else:
+                print(param, value)
 
-    experiment.log_metric("loss", final_loss)
-    experiment.log_metric("train_accuracy", train_accuracy)
-    experiment.log_metric("valid_accuracy", test_accuracy)
+    if experiment:
+        experiment.log_parameter("total_parameters", find_total_parameters(hyper_parameters["layers"]))
+    else:
+        print("total_parameters: ", find_total_parameters(hyper_parameters["layers"]))
+
+    if experiment:
+        experiment.log_metric("loss", final_loss)
+        experiment.log_metric("train_accuracy", train_accuracy)
+        experiment.log_metric("valid_accuracy", test_accuracy)
+    else:
+        print("loss", final_loss)
+        print("train_accuracy", train_accuracy)
+        print("valid_accuracy", test_accuracy)
 
 
 def find_total_parameters(layers):

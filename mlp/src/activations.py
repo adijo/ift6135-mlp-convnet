@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import numpy as np
-from literals.activations import ActivationLiterals
+from mlp.src.literals.activations import ActivationLiterals
 
 
 class Activation(ABC):

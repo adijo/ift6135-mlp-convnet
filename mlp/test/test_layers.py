@@ -1,7 +1,7 @@
 import unittest
-from layers import AbstractLayer, HiddenLayer, FinalLayer
-from literals.activations import ActivationLiterals
-from literals.initialization import InitLiterals
+from mlp.src.layers import HiddenLayer, FinalLayer
+from mlp.src.literals.activations import ActivationLiterals
+from mlp.src.literals.initialization import InitLiterals
 import numpy as np
 
 

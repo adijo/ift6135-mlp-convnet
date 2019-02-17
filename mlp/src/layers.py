@@ -1,6 +1,6 @@
 import numpy as np
-from activations import Activation
-from initialize import initialize_weights
+from mlp.src.activations import Activation
+from mlp.src.initialize import initialize_weights
 
 
 class AbstractLayer(object):

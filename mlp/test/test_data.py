@@ -1,5 +1,5 @@
 import unittest
-from data import MNISTDataset
+from mlp.src.data import MNISTDataset
 
 
 class TestMNISTDataset(unittest.TestCase):

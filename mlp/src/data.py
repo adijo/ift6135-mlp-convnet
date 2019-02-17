@@ -2,8 +2,7 @@ from abc import ABC
 from mlp.dataset import mnist
 from sklearn.datasets import make_moons, make_blobs
 import numpy as np
-import pickle
-import gzip
+
 
 class AbstractDataset(ABC):
     def __init__(self, X_train, y_train, batch_size):

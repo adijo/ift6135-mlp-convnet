@@ -1,8 +1,8 @@
-from data import MNISTDataset, MNISTTestDataset
-from layers import HiddenLayer, FinalLayer
-from literals.activations import ActivationLiterals
-from literals.initialization import InitLiterals
-from multi_layered_perceptron import MultiLayeredPerceptron
+from mlp.src.data import MNISTDataset, MNISTTestDataset
+from mlp.src.layers import HiddenLayer, FinalLayer
+from mlp.src.literals.activations import ActivationLiterals
+from mlp.src.literals.initialization import InitLiterals
+from mlp.src.multi_layered_perceptron import MultiLayeredPerceptron
 import matplotlib.pyplot as plt
 
 
